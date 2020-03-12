@@ -12,4 +12,7 @@ __Toimintoja:__
 *  oman kirjoituksen tai kommentin poistaminen
 *  hakutoiminto (käyttäjänimi, hakusana)
 *  oman kommenttihistorian tarkastelu
-*  Keskustelun merkkaantuminen luetuksi avattaessa
+*  keskustelun merkkaantuminen luetuksi avattaessa
+
+__Tietokanta:__
+![alt text](https://github.com/riiraty/tietokantasovellus/blob/master/Documentation/Pics/forum_database_schema.png "Database tables")
