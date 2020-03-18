@@ -15,4 +15,7 @@ __Toimintoja:__
 *  keskustelun merkkaantuminen luetuksi avattaessa
 
 __Tietokanta:__
-![alt text](https://github.com/riiraty/tietokantasovellus/blob/master/Documentation/Pics/forum_database_schema.png "Database tables")
+![alt text](https://github.com/riiraty/tietokantasovellus/blob/master/documentation/pics/forum_database_schema.png "Database tables")
+
+### Sovellus Herokussa
+[https://afternoon-oasis-48455.herokuapp.com/](https://afternoon-oasis-48455.herokuapp.com/)
