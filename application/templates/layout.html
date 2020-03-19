@@ -6,6 +6,12 @@
   </head>
 
   <body>
+    <ul>
+      <li><a href="{{ url_for('index') }}">Home</a></li>
+      <li><a href="{{ url_for('posts_index') }}">Posts</a></li>
+      <li><a href="{{ url_for('posts_form') }}">Add new</a></li>
+          </ul>
+
     {% block body %}
       <p>
         Content.
