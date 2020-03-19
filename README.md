@@ -3,7 +3,7 @@ Tietojenkäsittelytieteen aineopintojen harjoitustyö, Helsingin yliopisto, kev�
 
 ## Keskustelufoorumi
 Harjoitustyö on yksinkertainen keskustelufoorumi.
-Tarkempaa kuvaus tietokantakaavioineen löytyy [täältä](https://github.com/riiraty/tietokantasovellus/blob/master/documentation/documentation.md).
+Tarkempi kuvaus tietokantakaavioineen löytyy [täältä](https://github.com/riiraty/tietokantasovellus/blob/master/documentation/documentation.md).
 
 ### Sovellus Herokussa
 Sovellus löytyy osoitteesta [https://afternoon-oasis-48455.herokuapp.com/](https://afternoon-oasis-48455.herokuapp.com/)
