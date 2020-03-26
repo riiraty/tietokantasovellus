@@ -4,12 +4,14 @@
   <table>
     <tr>
       <th>Post</th>
+      <th>By</th>
       <th>Created</th>
     </tr>
-    {% for post in posts %}
+    {% for post in userPosts %}
     <tr>
       <td>{{ post.content }}</td>
-      <td>{{ post.post_time }}</td>
+      <td>{{ post.username }}</td>
+      <td>{{ post.post_time.strftime("%H:%M %d/%m/%y") }}</td>
     </tr>
     {% endfor %}
   </table>

@@ -3,11 +3,13 @@ from flask_login import login_required, current_user
 
 from application import app, db
 from application.posts.models import Post
+from application.auth.models import User
 from application.posts.forms import PostForm
 
 @app.route("/posts/", methods=["GET"])
 def posts_index():
-    return render_template("posts/list.html", posts = Post.query.all())
+    userPosts = db.session.query(Post.content, User.username, Post.post_time).outerjoin(User, Post.account_id == User.id).all()
+    return render_template("posts/list.html", posts = Post.query.all(), userPosts = userPosts)
 
 @app.route("/posts/new/")
 @login_required
