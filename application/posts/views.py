@@ -8,8 +8,7 @@ from application.posts.forms import PostForm
 
 @app.route("/posts/", methods=["GET"])
 def posts_index():
-    userPosts = db.session.query(Post.content, User.username, Post.post_time).outerjoin(User, Post.account_id == User.id).all()
-    return render_template("posts/list.html", posts = Post.query.all(), userPosts = userPosts)
+    return render_template("posts/list.html", posts = Post.query.all())
 
 @app.route("/posts/new/")
 @login_required

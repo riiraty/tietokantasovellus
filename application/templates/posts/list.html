@@ -7,10 +7,10 @@
       <th>By</th>
       <th>Created</th>
     </tr>
-    {% for post in userPosts %}
+    {% for post in posts %}
     <tr>
       <td>{{ post.content }}</td>
-      <td>{{ post.username }}</td>
+      <td>{{ post.account.username }}</td>
       <td>{{ post.post_time.strftime("%H:%M %d/%m/%y") }}</td>
     </tr>
     {% endfor %}
