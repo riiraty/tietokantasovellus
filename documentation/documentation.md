@@ -1,15 +1,13 @@
-## Keskustelufoorumi
-Harjoitustyö on keskustelufoorumi, johon henkilö voi luoda käyttäjätunnuksen ja kirjautua sisään. Käyttäjä voi avata haluamansa kirjoituksen ja sen kommentit näkyviin. Käyttäjä voi lisätä uuden aloituksen, tai vastata aiempaan kirjoitukseen tai kommenttiin. Omien aloitusten ja kommenttien poistaminen on mahdollista.  Oletusarvoisesti käyttäjälle näytetään tuoreimmat kirjoitukset. Hakutoiminnon avulla käyttäjä voi etsiä vanhoja keskusteluja käyttäjänimen tai hakusanan perusteella. Käyttäjä näkee mitkä kirjoitukset hän on jo lukenut. 
+# Keskustelufoorumi
+Harjoitustyönä  toteutetaan yksinkertainen keskustelufoorumi, jossa käyttäjät voivat lukea keskusteluketjuja ja osallistua kommentoimalla. Ketjujen lukeminen ei vaadi kirjautumista, mutta uuden ketjun aloitus tai kommentin jättäminen vaativat. Kirjatuneet käyttäjät voivat myös muokata tai poistaa omia kirjoituksiaan. 
 
-__Toimintoja:__
-*  käyttäjätilin luominen
-*  sisäänkirjautuminen
-*  uuden keskustelun aloittaminen
-*  vanhan keskustelun tai kommentin kommentoiminen
-*  oman kirjoituksen tai kommentin poistaminen
-*  hakutoiminto (käyttäjänimi, hakusana)
-*  oman kommenttihistorian tarkastelu
-*  keskustelun merkkaantuminen luetuksi avattaessa
+## Dokumentaatio
 
-__Alustava suunnitelma tietokannalle:__
-![alt text](https://github.com/riiraty/tietokantasovellus/blob/master/documentation/pics/forum_database_schema.png "Database tables")
+[Käyttötapaukset](https://github.com/riiraty/tietokantasovellus/blob/master/documentation/kayttotapaukset.md)
+
+[Asennus- ja käyttöohje](https://github.com/riiraty/tietokantasovellus/blob/master/documentation/asennus-_ja_kayttoohje.md)
+
+
+### Alustava suunnitelma tietokannalle
+
+![alt text](https://github.com/riiraty/tietokantasovellus/blob/master/documentation/pics/forum_database_schema1.png "Database tables")
