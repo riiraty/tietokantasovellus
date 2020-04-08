@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+<form method="POST" action="{{ url_for('posts_edit', post_id=post.id) }}">
+  <table>
+    <tr>
+      <td>
+        {{ form.content.label}}
+      </td>
+      <td>
+        {% set f = form.content.process_data(post.content) %}
+        {{ form.content() }}
+      </td>
+      <td>
+        <ul>
+          {% for error in form.content.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <input type="submit" value="save changes">
+      </td>
+      <td>
+        <a href="/posts/">cancel</a>
+      </td>
+    </tr>
+  </table>
+</form>
+{% endblock %}

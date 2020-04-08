@@ -12,6 +12,11 @@
       <td>{{ post.content }}</td>
       <td>{{ post.account.username }}</td>
       <td>{{ post.post_time.strftime("%H:%M %d/%m/%y") }}</td>
+      {% if user.id == post.account_id %}
+        <td>
+          <a href="{{url_for('posts_edit', post_id=post.id)}}">edit</a>
+        </td>
+      {% endif %}
     </tr>
     {% endfor %}
   </table>
