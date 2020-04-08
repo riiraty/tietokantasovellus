@@ -19,4 +19,5 @@ Sovellus käyttää Herokussa PostgreSQL-tietokantaa.
 * Lisätty aloitus tallentuu tietokantaan
 * Aloituksen yhteyteen tallentuu tieto sen lisänneestä käyttäjästä
 * Tehdyt aloitukset listautuvat polulla [/posts/](https://afternoon-oasis-48455.herokuapp.com/posts/) taulukkoon, jossa näkyy aloituksen sisältö, aloittajan käyttäjänimi ja luomisajankohta
+* Kirjatuneen käyttäjän omien aloitusten yhteydessä on listauksessa linkki, josta pääsee muokkaamaan tekstiä
 * Sivun ylälaitaan on toteutettu navigointia varten valikko
