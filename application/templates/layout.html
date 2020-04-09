@@ -12,6 +12,8 @@
     </p>
     {% else %}
     <a href="{{ url_for('auth_login') }}">Login</a>
+    or
+    <a href="{{ url_for('auth_signup') }}">Sign up</a>
     {% endif %}
     <ul>
       <li><a href="{{ url_for('index') }}">Home</a></li>

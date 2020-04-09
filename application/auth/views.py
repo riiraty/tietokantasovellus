@@ -3,8 +3,9 @@ from flask_login import login_user, logout_user
 
 from application import app, db
 from application.auth.models import User
-from application.auth.forms import LoginForm
+from application.auth.forms import LoginForm, SignUpForm
 
+# sisäänkirjautuminen
 @app.route("/auth/login/", methods = ["GET", "POST"])
 def auth_login():
   if request.method == "GET":
@@ -30,9 +31,47 @@ def auth_login():
 
   print("User '" + user.username + "' identified")
   login_user(user)
-  return redirect(url_for("index"))
+  return redirect(url_for("posts_index"))
 
+# uloskirjautuminen
 @app.route("/auth/logout/")
 def auth_logout():
   logout_user()
   return redirect(url_for("index"))
+
+# uusi käyttäjä
+@app.route("/auth/signup/", methods = ["GET", "POST"])
+def auth_signup():
+  if request.method == "GET":
+    return render_template("auth/signupform.html",
+      form = SignUpForm()
+    )
+  
+  form = SignUpForm(request.form)
+  
+  if not form.validate():
+    return render_template("auth/signupform.html",
+      form = form
+    )
+
+  wantedUsername = form.username.data
+
+  existingUser = User.query.filter_by(username=wantedUsername).first()
+
+  # jos käyttäjänimi ei ole jo käytössä
+  if not existingUser:
+    newUser = User(form.username.data, form.password.data)
+
+    db.session().add(newUser)
+    db.session.commit()
+
+    # uusi käyttäjä tallennettiin tietokantaan ja kirjataan sisään
+    login_user(newUser)
+    return redirect(url_for("posts_index"))
+  else:
+    return render_template("auth/signupform.html",
+      form = form,
+      error = "Wanted username already taken, choose another"
+    )
+
+
