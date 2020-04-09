@@ -1,5 +1,5 @@
-from flask import render_template, request, redirect, url_for
-from flask_login import login_user, logout_user
+from flask import render_template, request, redirect, url_for, flash
+from flask_login import login_user, logout_user, current_user
 
 from application import app, db
 from application.auth.models import User
@@ -37,6 +37,7 @@ def auth_login():
 @app.route("/auth/logout/")
 def auth_logout():
   logout_user()
+  flash("Succesfully logged out!")
   return redirect(url_for("index"))
 
 # uusi käyttäjä
@@ -67,11 +68,10 @@ def auth_signup():
 
     # uusi käyttäjä tallennettiin tietokantaan ja kirjataan sisään
     login_user(newUser)
+    flash(f"Welcome to the Forum, {current_user.username}! You are ready to start posting.")
     return redirect(url_for("posts_index"))
   else:
-    return render_template("auth/signupform.html",
-      form = form,
-      error = "Wanted username already taken, choose another"
-    )
+    flash("Wanted username already taken, choose another")
+    return render_template("auth/signupform.html", form = form)
 
 

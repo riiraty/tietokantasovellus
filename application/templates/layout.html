@@ -15,11 +15,20 @@
     or
     <a href="{{ url_for('auth_signup') }}">Sign up</a>
     {% endif %}
+
     <ul>
       <li><a href="{{ url_for('index') }}">Home</a></li>
       <li><a href="{{ url_for('posts_index') }}">Posts</a></li>
       <li><a href="{{ url_for('posts_form') }}">Add new</a></li>
-          </ul>
+    </ul>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+      {% endif %}
+    {% endwith %}
 
     {% block body %}
       <p>

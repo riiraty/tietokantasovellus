@@ -2,7 +2,6 @@
 
 {% block body %}
 <p>To sign up for Forum, enter desired username and password</p>
-{{ error }}
 <form method="POST" action="{{ url_for('auth_signup') }}">
   <table>
     <tr>

@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 
 from application import app, db
@@ -36,6 +36,7 @@ def posts_create():
   db.session().add(posted)
   db.session().commit()
   
+  flash("New post succesfully saved!")
   return redirect(url_for("posts_index"))
 
 # vanhan (oman) postauksen muokkauslomake
@@ -44,11 +45,13 @@ def posts_create():
 def edit_form(post_id):
   post = Post.query.get(post_id)
 
+  # kirjautuneen käyttäjän oltava alkuperäinen postaaja
   if post.account_id == current_user.id:
     return render_template("posts/edit_post.html",
       form = EditForm(), post = post
     )
   else:
+    flash("You are not authorized")
     return redirect(url_for("posts_index"))
 
 # muokkauksen tallennus
@@ -71,6 +74,7 @@ def posts_edit(post_id):
     post.content = newContent
     db.session().commit()
 
+    flash("Your post was edited succesfully!")
     return redirect(url_for("posts_index"))
   else:
     return redirect(url_for("posts_index"))
