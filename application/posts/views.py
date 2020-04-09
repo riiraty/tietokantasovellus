@@ -9,7 +9,10 @@ from application.posts.forms import PostForm, EditForm
 # listausnäkymä
 @app.route("/posts/", methods=["GET"])
 def posts_index():
-  return render_template("posts/list.html", posts = Post.query.all(), user = current_user)
+  return render_template("posts/list.html",
+    posts = Post.query.all(),
+    user = current_user
+  )
 
 # lomake uudelle postaukselle
 @app.route("/posts/new/")
@@ -42,7 +45,9 @@ def edit_form(post_id):
   post = Post.query.get(post_id)
 
   if post.account_id == current_user.id:
-    return render_template("posts/edit_post.html", form = EditForm(), post = post)
+    return render_template("posts/edit_post.html",
+      form = EditForm(), post = post
+    )
   else:
     return redirect(url_for("posts_index"))
 
@@ -54,6 +59,12 @@ def posts_edit(post_id):
 
   if post.account_id == current_user.id:
     form = EditForm(request.form)
+
+    if not form.validate():
+      return render_template("posts/edit_post.html",
+        form = form, post = post
+      )
+
     newContent = form.content.data
 
     post = Post.query.get(post_id)

@@ -7,21 +7,30 @@ from application.auth.forms import LoginForm
 
 @app.route("/auth/login/", methods = ["GET", "POST"])
 def auth_login():
-    if request.method == "GET":
-        return render_template("auth/loginform.html", form = LoginForm())
+  if request.method == "GET":
+    return render_template("auth/loginform.html",
+      form = LoginForm()
+    )
 
-    form = LoginForm(request.form)
-    # mahdolliset validoinnit
+  form = LoginForm(request.form)
+    
+  if not form.validate():
+    return render_template("auth/loginform.html",
+      form = LoginForm(),
+      error = 'There must be a typo, please try again'
+    )
 
-    user = User.query.filter_by(username=form.username.data, password=form.password.data).first()
-    if not user:
-        return render_template("auth/loginform.html", form = form,
-                               error = "No such username or password")
+  user = User.query.filter_by(username=form.username.data,
+    password=form.password.data).first()
+  if not user:
+    return render_template("auth/loginform.html",
+      form = form,
+      error = "Invalid username or password"
+    )
 
-
-    print("User '" + user.username + "' identified")
-    login_user(user)
-    return redirect(url_for("index"))
+  print("User '" + user.username + "' identified")
+  login_user(user)
+  return redirect(url_for("index"))
 
 @app.route("/auth/logout/")
 def auth_logout():
