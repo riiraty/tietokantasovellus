@@ -6,6 +6,7 @@ from sqlalchemy import desc
 from application import app, db
 from application.posts.models import Post
 from application.auth.models import User
+from application.threads.models import Thread
 from application.posts.forms import PostForm, EditForm
 
 # listausnäkymä
@@ -34,6 +35,12 @@ def posts_create():
 
   posted = Post(form.content.data)
   posted.account_id = current_user.id
+
+  thread = Thread(form.title.data)
+  db.session.add(thread)
+  db.session.commit()
+  
+  posted.thread_id = thread.id
 
   db.session().add(posted)
   db.session().commit()

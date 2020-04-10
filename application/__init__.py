@@ -19,6 +19,9 @@ from application import views
 from application.posts import models
 from application.posts import views
 
+from application.threads import models
+from application.threads import views
+
 from application.auth import models
 from application.auth import views
 
