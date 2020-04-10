@@ -43,7 +43,7 @@ def posts_create():
 @app.route("/posts/<post_id>", methods=["GET"])
 @login_required
 def edit_form(post_id):
-  post = Post.query.get(post_id)
+  post = Post.query.get_or_404(post_id)
 
   # kirjautuneen käyttäjän oltava alkuperäinen postaaja
   if post.account_id == current_user.id:
@@ -69,13 +69,27 @@ def posts_edit(post_id):
       )
 
     newContent = form.content.data
-
-    post = Post.query.get(post_id)
     post.content = newContent
+
     db.session().commit()
 
     flash("Your post was edited succesfully!")
     return redirect(url_for("posts_index"))
   else:
     return redirect(url_for("posts_index"))
+
+# oman postauksen poistaminen
+@app.route("/posts/delete/<post_id>", methods=["GET", "POST"])
+@login_required
+def posts_delete(post_id):
+  post = Post.query.get(post_id)
+
+  if post.account_id == current_user.id:
+    db.session.delete(post)
+    db.session.commit()
+    flash("Succesfully deleted")
+  else:
+    flash("You are not authorized")
+
+  return redirect(url_for("posts_index"))
 

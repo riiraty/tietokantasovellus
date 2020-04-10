@@ -23,6 +23,15 @@
       <td colspan="2">
         <input type="submit" value="save changes">
       </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="{{url_for('posts_delete', post_id=post.id)}}"
+          onclick="return confirm('Are you sure?')"
+        >delete</a>
+      </td>
+    </tr>
+    <tr>
       <td>
         <a href="/posts/">cancel</a>
       </td>

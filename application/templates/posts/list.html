@@ -3,18 +3,25 @@
 {% block body %}
   <table>
     <tr>
+      <th>ID</th>
       <th>Post</th>
       <th>By</th>
       <th>Created</th>
     </tr>
     {% for post in posts %}
     <tr>
+      <td>{{ post.id }}</td>
       <td>{{ post.content }}</td>
       <td>{{ post.account.username }}</td>
       <td>{{ post.post_time.strftime("%H:%M %d/%m/%y") }}</td>
       {% if user.id == post.account_id %}
         <td>
           <a href="{{url_for('posts_edit', post_id=post.id)}}">edit</a>
+        </td>
+        <td>
+          <a href="{{url_for('posts_delete', post_id=post.id)}}" 
+            onclick="return confirm('Are you sure? Click `OK` to delete post permanently')"
+          >delete</a>
         </td>
       {% endif %}
     </tr>
