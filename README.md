@@ -18,10 +18,13 @@ Sovellus käyttää Herokussa PostgreSQL-tietokantaa.
 * Uusi aloitus tallennetaan tietokantaan
 * Kirjautunut käyttäjä voi muokata omia aloituksiaan polulla /posts/<post.id>
 * Muokattu teksti päivitetään tietokantaan
+* Kirjautunut käyttäjä voi poistaa oman aloituksen polulla /posts/delete/<post.id>
+* Poistettua aloitusta vastaava rivi poistetaan tietokannasta
 * Lomakkeiden syötteille on validoinnit, virheviestit näytetään käyttäjälle
 * Salasanat on toistaiseksi tallennettu tietokantaan selkokielisinä
 * Aloituksen yhteyteen tallentuu tieto sen lisänneestä käyttäjästä
 * Tehdyt aloitukset listautuvat polulla [/posts/](https://afternoon-oasis-48455.herokuapp.com/posts/) taulukkoon, jossa näkyy aloituksen sisältö, aloittajan käyttäjänimi ja luomisajankohta
 * Kirjatuneen käyttäjän omien aloitusten yhteydessä on listauksessa linkki, josta pääsee muokkaamaan tekstiä
+* Kirjautuneen käyttäjän omien aloitusten yhteydessä on varmituksella varustettu linkki, josta oman aloituksen voi poistaa
 * Sivun ylälaidassa on linkit kirjautumis- ja rekisteröitymislomakkeille, tai tieto kirjautuneesta käyttäjästä ja linkki uloskirjautumista varten
 * Sivun ylälaitaan on toteutettu navigointia varten valikko
