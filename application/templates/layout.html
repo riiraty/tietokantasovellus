@@ -17,9 +17,8 @@
     {% endif %}
 
     <ul>
-      <li><a href="{{ url_for('index') }}">Home</a></li>
       <li><a href="{{ url_for('posts_index') }}">Posts</a></li>
-      <li><a href="{{ url_for('posts_form') }}">Add new</a></li>
+      <li><a href="{{ url_for('threads_form') }}">New</a></li>
     </ul>
 
     {% with messages = get_flashed_messages() %}

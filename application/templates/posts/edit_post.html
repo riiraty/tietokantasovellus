@@ -1,12 +1,17 @@
 {% extends "layout.html" %}
   
 {% block body %}
-<form method="POST" action="{{ url_for('posts_edit', post_id=post.id) }}">
+<h3>{{ post.thread.title}}</h3>
+<form method="POST" action="{{ url_for('posts_edit',
+  thread_id=post.thread_id,
+  post_id=post.id) }}">
   <table>
     <tr>
       <td>
         {{ form.content.label}}
       </td>
+    </tr>
+    <tr>
       <td>
         {% set f = form.content.process_data(post.content) %}
         {{ form.content() }}
@@ -27,7 +32,7 @@
     <tr>
       <td>
         <a href="{{url_for('posts_delete', post_id=post.id)}}"
-          onclick="return confirm('Are you sure?')"
+          onclick="return confirm('Are you sure? The post will be deleted permanently.')"
         >delete</a>
       </td>
     </tr>

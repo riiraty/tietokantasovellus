@@ -1,9 +1,16 @@
 {% extends "layout.html" %}
   
 {% block body %}
-<form method="POST" action="{{ url_for('posts_create',
-  thread_id = thread_id) }}">
+<form method="POST" action="{{ url_for('threads_create') }}">
   <table>
+    <tr>
+      <td>
+        {{ form.title.label}}
+      </td>
+      <td>
+        {{ form.title}}
+      </td>
+    </tr>
     <tr>
       <td>
         {{ form.content.label}}
@@ -21,7 +28,7 @@
     </tr>
     <tr>
       <td colspan="2">
-        <input type="submit" value="Comment">
+        <input type="submit" value="Add a new post">
       </td>
       <td>
         <a href="/posts/">cancel</a>

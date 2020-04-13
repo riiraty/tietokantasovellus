@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <strong>{{ thread.title }}</strong>
+  <em>{{ thread.creation_time.strftime("%H:%M %d/%m/%y") }}</em>
+  <table>
+    {% for post in thread.posts %}
+      <tr>
+        <td>
+          {{ post.content }}
+          ({{ post.account.username }})
+        </td>
+        <td>
+          {{ post.post_time.strftime("%H:%M %d/%m/%y")}}
+        </td>
+        {% if user.id == post.account_id %}
+        <td>
+          <a href="{{url_for('edit_form', thread_id=post.thread.id,post_id=post.id)}}">edit</a>
+        </td>
+        <td>
+          <a href="{{url_for('posts_delete', post_id=post.id)}}" 
+            onclick="return confirm('Are you sure? Click `OK` to delete post permanently')"
+          >delete</a>
+        </td>
+        {% endif %}
+      </tr>
+    {% endfor %}
+    </table>
+  <a href="{{ url_for('posts_form', thread_id=thread.id) }}">add comment</a>
+
+{% endblock %}
