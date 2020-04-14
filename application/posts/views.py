@@ -85,9 +85,9 @@ def posts_edit(thread_id, post_id):
     return redirect(url_for("posts_index"))
 
 # oman postauksen poistaminen
-@app.route("/posts/delete/<post_id>", methods=["GET", "POST"])
+@app.route("/posts/<thread_id>/delete/<post_id>", methods=["GET", "POST"])
 @login_required
-def posts_delete(post_id):
+def posts_delete(thread_id, post_id):
   post = Post.query.get(post_id)
 
   if post.account_id == current_user.id:

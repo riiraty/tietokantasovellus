@@ -23,15 +23,16 @@ def threads_create():
   if not form.validate():
     return render_template("thread/new.html", form = form)
 
-  posted = Post(form.content.data)
-  posted.account_id = current_user.id
-
+  # luodaan uusi lanka ja luodaan ID tallentamalla
   thread = Thread(form.title.data)
+  thread.owner_id = current_user.id
   db.session.add(thread)
   db.session.commit()
-  
-  posted.thread_id = thread.id
 
+  # luodaan uusi postaus
+  posted = Post(form.content.data)
+  posted.account_id = current_user.id
+  posted.thread_id = thread.id
   db.session().add(posted)
   db.session().commit()
   
@@ -47,3 +48,21 @@ def posts_thread(thread_id):
     thread = thread,
     user = current_user
   )
+
+# langan poistaminen
+@app.route("/posts/threads/delete/<thread_id>", methods=["GET", "POST"])
+@login_required
+def threads_delete(thread_id):
+  thread = Thread.query.get_or_404(thread_id)
+
+  # kirjautuneen oltava langan omistaja
+  if thread.owner_id == current_user.id:
+    db.session.delete(thread)
+    Thread.delete_thread_posts(thread_id)
+    db.session.commit()
+
+    flash("Your post and all the comments were deleted")
+    return redirect(url_for("posts_index"))
+  else:
+    flash("You are not authorized")
+    return redirect(url_for("posts_index"))

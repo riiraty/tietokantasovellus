@@ -31,14 +31,14 @@
     </tr>
     <tr>
       <td>
-        <a href="{{url_for('posts_delete', post_id=post.id)}}"
+        <a href="{{url_for('posts_delete', thread_id=post.thread_id, post_id=post.id)}}"
           onclick="return confirm('Are you sure? The post will be deleted permanently.')"
         >delete</a>
       </td>
     </tr>
     <tr>
       <td>
-        <a href="/posts/">cancel</a>
+        <a href="{{url_for('posts_thread', thread_id=post.thread_id)}}">cancel</a>
       </td>
     </tr>
   </table>
