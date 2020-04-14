@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 
-from sqlalchemy import desc, distinct
+from sqlalchemy import desc
 
 from application import app, db
 from application.posts.models import Post
@@ -12,11 +12,15 @@ from application.posts.forms import PostForm, EditForm
 # listausnäkymä
 @app.route("/posts/", methods=["GET"])
 def posts_index():
-  # palautetaan 25:den tuoreimman postauksen langat
-  return render_template("posts/list.html",
-    posts = Post.query.group_by(Post.thread_id).order_by(desc(Post.post_time)).limit(25).all(),
+    return render_template("posts/list.html",
+    posts = Post.query.all(),
     user = current_user
   )
+  # # palautetaan 25:den tuoreimman postauksen langat
+  # return render_template("posts/list.html",
+  #   posts = Post.query.group_by(Post.thread_id).order_by(desc(Post.post_time)).limit(25).all(),
+  #   user = current_user
+  # )
 
 # lomake uudelle kommentille
 @app.route("/posts/<thread_id>/new/")
