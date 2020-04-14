@@ -13,7 +13,7 @@ from application.posts.forms import PostForm, EditForm
 @app.route("/posts/", methods=["GET"])
 def posts_index():
     return render_template("posts/list.html",
-    posts = Post.query.all(),
+    posts = Post.query.group_by(Post.thread_id).all(),
     user = current_user
   )
   # # palautetaan 25:den tuoreimman postauksen langat
