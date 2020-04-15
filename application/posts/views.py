@@ -14,7 +14,7 @@ from application.posts.forms import PostForm, EditForm
 def posts_index():
   # postgresql
     return render_template("posts/list.html",
-    posts = Post.query.distinct(Post.thread_id).order_by(Post.thread_id, Post.post_time.desc()).all(),
+    posts = Post.query.distinct(Post.thread_id).order_by(Post.post_time.desc()).all(),
     user = current_user
   )
   # #sqlite
