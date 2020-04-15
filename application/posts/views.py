@@ -12,11 +12,12 @@ from application.posts.forms import PostForm, EditForm
 # listausnäkymä
 @app.route("/posts/", methods=["GET"])
 def posts_index():
+  # postgresql
     return render_template("posts/list.html",
-    posts = Post.query.group_by(Post.thread_id).all(),
+    posts = Post.query.distinct(Post.thread_id).order_by(Post.thread_id, Post.post_time.desc()).all(),
     user = current_user
   )
-  # # palautetaan 25:den tuoreimman postauksen langat
+  # #sqlite
   # return render_template("posts/list.html",
   #   posts = Post.query.group_by(Post.thread_id).order_by(desc(Post.post_time)).limit(25).all(),
   #   user = current_user
