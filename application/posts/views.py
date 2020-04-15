@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 
-from sqlalchemy import desc
+from sqlalchemy import desc, func
 
 from application import app, db
 from application.posts.models import Post
@@ -12,16 +12,16 @@ from application.posts.forms import PostForm, EditForm
 # listausnäkymä
 @app.route("/posts/", methods=["GET"])
 def posts_index():
-  # postgresql
-    return render_template("posts/list.html",
-    posts = Post.query.distinct(Post.thread_id).order_by(Post.post_time.desc()).all(),
-    user = current_user
-  )
-  # #sqlite
-  # return render_template("posts/list.html",
-  #   posts = Post.query.group_by(Post.thread_id).order_by(desc(Post.post_time)).limit(25).all(),
+  # # postgresql group_by ei toimi, distinct valitsee ekan rivin, ei vikaa
+  #   return render_template("posts/list.html",
+  #   posts = Post.query.distinct(Post.thread_id).order_by(Post.thread_id, Post.post_time.desc()).all(),
   #   user = current_user
   # )
+  # sqlite 25 viimeksi kommentoitua lankaa
+  return render_template("posts/list.html",
+    posts = Post.query.group_by(Post.thread_id).order_by(desc(Post.post_time)).limit(25).all(),
+    user = current_user
+  )
 
 # lomake uudelle kommentille
 @app.route("/posts/<thread_id>/new/")
@@ -39,6 +39,9 @@ def posts_create(thread_id):
 
   if not form.validate():
     return render_template("posts/new.html", form = form)
+
+  thread = Thread.query.get(thread_id)
+  thread.modification_time = db.func.current_timestamp()
 
   posted = Post(form.content.data)
   posted.account_id = current_user.id
