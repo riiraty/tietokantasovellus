@@ -2,11 +2,11 @@
 
 ## Keskustelujen listaus
 
-Käyttäjä voi tarkastella aiemmin aloitettuja keskusteluketjuja linkistä *Posts*. Oletuksena näytetään 25 tuoreinta ketjua. Listauksessa nähdään ketjun aloittanut kirjoitus, aloituksen tehneen käyttäjän salasana ja ajankohta ketjun luomiselle.
+Käyttäjä voi tarkastella aiemmin aloitettuja keskusteluketjuja linkistä *Posts*. Oletuksena näytetään 25 tuoreinta ketjua. Listauksessa nähdään ketjun otsikko ja ajankohta ketjun luomiselle.
 
 ## Yksittäisen ketjun tarkastelu
 
-Käyttäjä voi avata keskusteluketjun omalle sivulleen klikkaamalla aloitusta keskustelujen listauksessa. Aloitukseen liittyvät kommentit listataan näkyviin, ja niihin liittyvät kommentit voi avata klikkaamalla jne. 
+Käyttäjä voi avata keskusteluketjun omalle sivulleen klikkaamalla aloitusta keskustelujen listauksessa. Aloitukseen liittyvät kommentit listataan näkyviin.
 
 ## Käyttäjätilin luominen
 
@@ -30,7 +30,7 @@ Kirjautunut käyttäjä voi muokata aiemmin lisäämiään aloituksia tai kommen
 
 # Oman aloituksen tai kommentin poistaminen
 
-Kirjautunut käyttäjä voi poistaa omia aloituksia tai kommetteja.
+Kirjautunut käyttäjä voi poistaa omia aloituksia tai kommentteja.
 
 # Oman keskusteluhistorian tarkastelu
 

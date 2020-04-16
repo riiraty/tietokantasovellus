@@ -8,6 +8,6 @@ Harjoitustyönä  toteutetaan yksinkertainen keskustelufoorumi, jossa käyttäj�
 [Asennus- ja käyttöohje](https://github.com/riiraty/tietokantasovellus/blob/master/documentation/asennus-_ja_kayttoohje.md)
 
 
-### Alustava suunnitelma tietokannalle
+### Tietokannan rakenne
 
-![alt text](https://github.com/riiraty/tietokantasovellus/blob/master/documentation/pics/forum_database_schema1.png "Database tables")
+![alt text](https://github.com/riiraty/tietokantasovellus/blob/master/documentation/pics/forum_database_schema2.png "Database tables")
