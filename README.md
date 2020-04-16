@@ -10,21 +10,46 @@ Sovellus löytyy osoitteesta [https://afternoon-oasis-48455.herokuapp.com/](http
 
 Sovellus käyttää Herokussa PostgreSQL-tietokantaa.
 
-### Toteutettu toiminnallisuus:
-* Käyttäjä voi kirjautua sisään polulla [/auth/login/](https://afternoon-oasis-48455.herokuapp.com/auth/login/) ('hello', 'test')
-* Uusi käyttäjä voi rekisteröityä palveluun polulla [/auth/signup/](https://afternoon-oasis-48455.herokuapp.com/auth/signup/)
-* Uusi käyttäjä tallennetaan tietokantaan
-* Kirjautunut käyttäjä voi lisätä foorumille uuden aloituksen täyttämällä lomakkeen polulla [/posts/new](https://afternoon-oasis-48455.herokuapp.com/posts/new)
-* Uusi aloitus tallennetaan tietokantaan
-* Kirjautunut käyttäjä voi muokata omia aloituksiaan polulla /posts/<post.id>
-* Muokattu teksti päivitetään tietokantaan
-* Kirjautunut käyttäjä voi poistaa oman aloituksen polulla /posts/delete/<post.id>
-* Poistettua aloitusta vastaava rivi poistetaan tietokannasta
-* Lomakkeiden syötteille on validoinnit, virheviestit näytetään käyttäjälle
-* Salasanat on toistaiseksi tallennettu tietokantaan selkokielisinä
-* Aloituksen yhteyteen tallentuu tieto sen lisänneestä käyttäjästä
-* Tehdyt aloitukset listautuvat polulla [/posts/](https://afternoon-oasis-48455.herokuapp.com/posts/) taulukkoon, jossa näkyy aloituksen sisältö, aloittajan käyttäjänimi ja luomisajankohta
-* Kirjatuneen käyttäjän omien aloitusten yhteydessä on listauksessa linkki, josta pääsee muokkaamaan tekstiä
-* Kirjautuneen käyttäjän omien aloitusten yhteydessä on varmituksella varustettu linkki, josta oman aloituksen voi poistaa
-* Sivun ylälaidassa on linkit kirjautumis- ja rekisteröitymislomakkeille, tai tieto kirjautuneesta käyttäjästä ja linkki uloskirjautumista varten
+### Toteutetut toiminnallisuudet
+
+#### Rekisteröityminen
+
+* Käyttäjä voi rekisteröityä foorumille täyttämällä [lomakkeen](https://afternoon-oasis-48455.herokuapp.com/auth/signup/)
+* Salasanat tallentuvat tietokantaan toistaiseksi selkokielisinä
+
+#### Sisäänkirjautuminen
+
+* Käyttäjä voi [kirjautua sisään](https://afternoon-oasis-48455.herokuapp.com/auth/login/) palveluun omilla tunnuksillaan
+* Tieto kirjautumisesta tulee näkyviin navigointipalkkiin
+
+#### Keskustelujen tarkastelu
+
+* Käyttäjä näkee [listauksessa](https://afternoon-oasis-48455.herokuapp.com/posts/) 25 tuoreinta kommenttiketjua 
+* Kysely on tällä hetkellä toteutettu ohjelmallisesti ja tarpeettoman monimutkaisesti, samat tiedot saa helpommin Thread-taulusta
+* Ketjun otsikko on linkki, josta voi avata ketjun näkyviin
+* Yksittäisen ketjun näkymässä listataan ketjun postaukset
+
+#### Uuden kommenttiketjun luominen
+
+* Kirjautunut käyttäjä voi aloittaa uuden kommenttiketjun täyttämällä [lomakkeen](https://afternoon-oasis-48455.herokuapp.com/posts/threads/new/)
+* Uusi ketju ja ensimmäinen postaus tallennetaan tietokantaan
+
+#### Vanhan ketjun kommentoiminen
+
+* Kirjautunut käyttäjä voi lisätä ketjuun kommentin täyttämällä lomakkeen
+* Ketjuun päivittyy muokkausajankohdaksi uusimman postauksen luomisajankohta
+
+#### Omien sisältöjen hallinnointi
+
+* Kirjautunut käyttäjä näkee yksittäisen ketjun listauksessa omien kommenttiensa kohdalla napit postauksen muokkausta ja poistoa varten
+* Kommentin muokkaaminen päivittää vastaavan rivin tietokannassa
+* Kommentin poisto varmistetaan käyttäjältä, varmistus poistaa vastaavan rivin tietokannasta
+* Ketjun aloittanut käyttäjä voi poistaa koko ketjun, ja kaikki siihen liittyvät kommentit
+* Ketjun poisto varmistetaan käyttäjältä
+
+#### Muuta
+
 * Sivun ylälaitaan on toteutettu navigointia varten valikko
+* Lomakkeiden syötteillä on validointeja, virheviestit näytetään käyttäjälle
+* Sovellukseen on lisätty Bootstrapin tyylejä
+* Toiminnoista näytetään käyttäjälle flash-viestejä
