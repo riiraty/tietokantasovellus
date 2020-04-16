@@ -12,16 +12,22 @@ from application.posts.forms import PostForm, EditForm
 # listausnäkymä
 @app.route("/posts/", methods=["GET"])
 def posts_index():
+  sub = db.session.query(func.max(Post.id)).group_by(Post.thread_id).subquery()
+  posts = db.session.query(Post).filter(Post.id.in_(sub)).order_by(Post.post_time.desc()).all()
+  return render_template("posts/list.html",
+    posts = posts,
+    user = current_user
+  )
   # # postgresql group_by ei toimi, distinct valitsee ekan rivin, ei vikaa
   #   return render_template("posts/list.html",
   #   posts = Post.query.distinct(Post.thread_id).order_by(Post.thread_id, Post.post_time.desc()).all(),
   #   user = current_user
   # )
   # sqlite 25 viimeksi kommentoitua lankaa
-  return render_template("posts/list.html",
-    posts = Post.query.group_by(Post.thread_id).order_by(desc(Post.post_time)).limit(25).all(),
-    user = current_user
-  )
+  # return render_template("posts/list.html",
+  #   posts = Post.query.group_by(Post.thread_id).order_by(desc(Post.post_time)).limit(25).all(),
+  #   user = current_user
+  # )
 
 # lomake uudelle kommentille
 @app.route("/posts/<thread_id>/new/")
