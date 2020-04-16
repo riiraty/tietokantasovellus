@@ -2,11 +2,14 @@
 
 {% block body %}
   <h2>Most recent</h2>
-  <table>
-    <tr>
-      <th>Topic</th>
-      <th>Latest update</th>
-    </tr>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Topic</th>
+        <th scope="col">Latest update</th>
+      </tr>
+    </thead>
+    <tbody>
     {% for post in posts %}
     <tr>
       <td>
@@ -17,5 +20,6 @@
       <td>{{ post.post_time.strftime("%H:%M %d/%m/%y") }}</td>
     </tr>
     {% endfor %}
+    </tbody>
   </table>
 {% endblock %}

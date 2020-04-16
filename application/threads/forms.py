@@ -6,7 +6,7 @@ class ThreadForm(FlaskForm):
     validators.Length(min=3, max=64),
     validators.Regexp('.*\S+.*')
   ])
-  content = TextAreaField("Post content", [
+  content = TextAreaField("Your post", [
     validators.Length(min=3, max=280),
     validators.Regexp('.*\S+.*')
   ])

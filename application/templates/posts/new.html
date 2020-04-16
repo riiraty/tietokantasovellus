@@ -8,6 +8,8 @@
       <td>
         {{ form.content.label}}
       </td>
+    </tr>
+    <tr>
       <td>
         {{ form.content }}
       </td>
@@ -21,7 +23,7 @@
     </tr>
     <tr>
       <td colspan="2">
-        <input type="submit" value="Comment">
+        <input type="submit" value="comment">
       </td>
       <td>
         <a href="{{url_for('posts_thread', thread_id=thread_id)}}">cancel</a>
