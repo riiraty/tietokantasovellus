@@ -2,11 +2,11 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, validators
 
 class ThreadForm(FlaskForm):
-  title = StringField("Title", [
-    validators.Length(min=3, max=64),
+  title = StringField("title", [
+    validators.Length(min=3, max=60),
     validators.Regexp('.*\S+.*')
   ])
-  content = TextAreaField("Your post", [
+  content = TextAreaField("content", [
     validators.Length(min=3, max=280),
     validators.Regexp('.*\S+.*')
   ])

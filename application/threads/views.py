@@ -12,7 +12,9 @@ from application.threads.forms import ThreadForm
 @app.route("/posts/threads/new/")
 @login_required
 def threads_form():
-  return render_template("threads/new_thread.html", form = ThreadForm())
+  return render_template("threads/new_thread.html",
+    form = ThreadForm()
+  )
 
 # uuden langan tallennus
 @app.route("/posts/threads/", methods=["POST"])
@@ -21,7 +23,9 @@ def threads_create():
   form = ThreadForm(request.form)
 
   if not form.validate():
-    return render_template("thread/new.html", form = form)
+    return render_template("threads/new_thread.html",
+      form = form
+    )
 
   # luodaan uusi lanka ja luodaan ID tallentamalla
   thread = Thread(form.title.data)

@@ -1,34 +1,20 @@
 {% extends "layout.html" %}
   
 {% block body %}
-<form method="POST" action="{{ url_for('posts_create',
-  thread_id = thread_id) }}">
-  <table>
-    <tr>
-      <td>
-        {{ form.content.label}}
-      </td>
-    </tr>
-    <tr>
-      <td>
-        {{ form.content }}
-      </td>
-      <td>
-        <ul>
-          {% for error in form.content.errors %}
-          <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <input type="submit" value="comment">
-      </td>
-      <td>
-        <a href="{{url_for('posts_thread', thread_id=thread_id)}}">cancel</a>
-      </td>
-    </tr>
-  </table>
+<h3>{{ title }}</h3>
+
+<form method="POST" action="{{ url_for('posts_create', thread_id = thread_id) }}">
+  <div class="form-group">
+    <div>
+      {% for error in form.content.errors %}
+      <em>{{ error }}</em> </br>
+      {% endfor %}
+    </div>
+    <div>
+      {{ form.content(class="form-control", rows='5', placeholder="Your comment")}}
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">post</button>
+  <a class="btn btn-warning" href="{{url_for('posts_thread', thread_id=thread_id)}}" role="button">cancel</a>
 </form>
 {% endblock %}

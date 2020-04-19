@@ -7,7 +7,7 @@ from application import app, db
 from application.posts.models import Post
 from application.auth.models import User
 from application.threads.models import Thread
-from application.posts.forms import PostForm, EditForm
+from application.posts.forms import PostForm
 
 # listausnäkymä
 @app.route("/posts/", methods=["GET"])
@@ -25,20 +25,29 @@ def posts_index():
 @app.route("/posts/<thread_id>/new/")
 @login_required
 def posts_form(thread_id):
+  thread = Thread.query.get_or_404(thread_id)
+  
   return render_template("posts/new.html",
     form = PostForm(),
-    thread_id = thread_id)
+    thread_id = thread_id,
+    title = thread.title
+  )
 
 # uuden tallennus
 @app.route("/posts/<thread_id>", methods=["POST"])
 @login_required
 def posts_create(thread_id):
+  thread = Thread.query.get_or_404(thread_id)
+
   form = PostForm(request.form)
 
   if not form.validate():
-    return render_template("posts/new.html", form = form)
+    return render_template("posts/new.html",
+      form = form,
+      thread_id = thread_id,
+      title = thread.title
+    )
 
-  thread = Thread.query.get(thread_id)
   thread.modification_time = db.func.current_timestamp()
 
   posted = Post(form.content.data)
@@ -60,7 +69,7 @@ def edit_form(thread_id, post_id):
   # kirjautuneen käyttäjän oltava alkuperäinen postaaja
   if post.account_id == current_user.id:
     return render_template("posts/edit_post.html",
-      form = EditForm(), post = post
+      form = PostForm(), post = post
     )
   else:
     flash("You are not authorized")
@@ -70,10 +79,10 @@ def edit_form(thread_id, post_id):
 @app.route("/posts/<thread_id>/<post_id>", methods=["POST"])
 @login_required
 def posts_edit(thread_id, post_id):
-  post = Post.query.get(post_id)
+  post = Post.query.get_or_404(post_id)
 
   if post.account_id == current_user.id:
-    form = EditForm(request.form)
+    form = PostForm(request.form)
 
     if not form.validate():
       return render_template("posts/edit_post.html",

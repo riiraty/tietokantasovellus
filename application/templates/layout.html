@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Forum</title>
+    <script src="https://kit.fontawesome.com/60cd6a16f0.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   </head>
 
@@ -16,20 +17,20 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('posts_index') }} ">Posts</a>
+              <a class="nav-link" href="{{ url_for('posts_index') }} "><i class="fas fa-home"></i></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('threads_form') }} ">Add new</a>
+              <a class="nav-link" href="{{ url_for('threads_form') }} "><i class="fas fa-pen"></i> New</a>
             </li>
         </ul>
         <div class="form-inline mt-2 mt-md-0">
           {% if current_user.is_authenticated %}
           <span class="navbar-text mr-4">
-            Logged in as '{{current_user.username}}'
+            <i class="fas fa-user"></i><em> {{current_user.username}}</em>
           </span>
-          <a href="{{ url_for('auth_logout') }}">Logout</a>
+          <a href="{{ url_for('auth_logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
           {% else %}
-          <a href="{{ url_for('auth_login') }}">Login</a>
+          <a href="{{ url_for('auth_login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
           <span class="navbar-text mr-2 ml-2">
             or 
           </span>
