@@ -57,7 +57,7 @@ def posts_create(thread_id):
   db.session().add(posted)
   db.session().commit()
   
-  flash("Your comment was succesfully saved!")
+  flash("Your comment was posted", "alert alert-info")
   return redirect(url_for("posts_thread", thread_id=thread_id))
 
 # vanhan (oman) postauksen muokkauslomake
@@ -72,7 +72,7 @@ def edit_form(thread_id, post_id):
       form = PostForm(), post = post
     )
   else:
-    flash("You are not authorized")
+    flash("You are not authorized", "alert alert-danger")
     return redirect(url_for("posts_index"))
 
 # muokkauksen tallennus
@@ -94,9 +94,9 @@ def posts_edit(thread_id, post_id):
 
     db.session().commit()
 
-    flash("Your post was edited succesfully!")
+    flash("Your post was edited", "alert alert-info")
   else:
-    flash("You are not authorized")
+    flash("You are not authorized", "alert alert-danger")
     
   return redirect(url_for("posts_thread", thread_id=thread_id))
 
@@ -109,9 +109,9 @@ def posts_delete(thread_id, post_id):
   if post.account_id == current_user.id:
     db.session.delete(post)
     db.session.commit()
-    flash("Succesfully deleted")
+    flash("Your post was deleted", "alert alert-info")
   else:
-    flash("You are not authorized")
+    flash("You are not authorized", "alert alert-danger")
 
   return redirect(url_for("posts_thread", thread_id=thread_id))
 

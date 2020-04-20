@@ -13,7 +13,7 @@
     {% for post in posts %}
     <tr>
       <td>
-        <a href="{{url_for('posts_thread', thread_id=post.thread.id)}}">
+        <a href="{{url_for('posts_thread', thread_id=post.thread.id)}}" class="text-info">
           {{ post.thread.title }}
         </a>
       </td>

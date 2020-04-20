@@ -1,51 +1,40 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<p>To sign up for Forum, enter desired username and password</p>
+<h3>With an account, you can participate in Forum discussions. Sign up by filling the form.</h3>
+
 <form method="POST" action="{{ url_for('auth_signup') }}">
-  <table>
-    <tr>
-      <td>
-	      {{ form.username.label }}
-      </td>
-      <td>
-	      {{ form.username }}
-      </td>
-      <td>
-        <ul>
-          {% for error in form.username.errors %}
-          <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>
-      	{{ form.password.label }}
-      </td>
-      <td>
-      	{{ form.password }}
-      </td>
-      <td>
-        <ul>
-          {% for error in form.password.errors %}
-          <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        {{ form.confirm.label }}
-      </td>
-      <td>
-        {{ form.confirm }}
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-      	<input type="submit" value="Sign up"/>
-      </td>
-    </tr>
+  <div class="form-group">
+    <div>
+      {% for error in form.username.errors %}
+      <em>{{ error }}</em> </br>
+      {% endfor %}
+    </div>
+    <div>
+      {{ form.username(class="form-control", placeholder="Username")}}
+    </div>
+  </div>
+  <div class="form-group">
+    <div>
+      {% for error in form.password.errors %}
+      <em>{{ error }}</em> </br>
+      {% endfor %}
+    </div>
+    <div>
+      {{ form.password(class="form-control", placeholder="Password")}}
+    </div>
+  </div>
+  <div class="form-group">
+    <div>
+      {% for error in form.confirm.errors %}
+      <em>{{ error }}</em> </br>
+      {% endfor %}
+    </div>
+    <div>
+      {{ form.confirm(class="form-control", placeholder="Repeat password")}}
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">sign up</button>
+  <a class="btn btn-warning" href="{{url_for('posts_index')}}" role="button">cancel</a>
 </form>
 {% endblock %}

@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   </head>
 
-  <body>
+  <body style="background-color:#FAFAFA;">
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <nav class="navbar navbar-expand-md navbar-light bg-info mb-4">
       <a class="navbar-brand" href="/">Forum</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -17,10 +17,10 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('posts_index') }} "><i class="fas fa-home"></i></a>
+              <a class="nav-link" href="{{ url_for('posts_index') }} "><i class="fas fa-home fa-lg"></i></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('threads_form') }} "><i class="fas fa-pen"></i> New</a>
+              <a class="nav-link" href="{{ url_for('threads_form') }} "><i class="fas fa-pen fa-lg"></i> New</a>
             </li>
         </ul>
         <div class="form-inline mt-2 mt-md-0">
@@ -28,22 +28,22 @@
           <span class="navbar-text mr-4">
             <i class="fas fa-user"></i><em> {{current_user.username}}</em>
           </span>
-          <a href="{{ url_for('auth_logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          <a href="{{ url_for('auth_logout') }}" class="text-light"><i class="fas fa-sign-out-alt"></i> Logout</a>
           {% else %}
-          <a href="{{ url_for('auth_login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+          <a href="{{ url_for('auth_login') }}" class="text-light"><i class="fas fa-sign-in-alt"></i> Login</a>
           <span class="navbar-text mr-2 ml-2">
             or 
           </span>
-          <a href="{{ url_for('auth_signup') }}">Sign up</a>
+          <a href="{{ url_for('auth_signup') }}" class="text-light">Sign up</a>
           {% endif %}
         </div>
       </div>
     </nav>
 
-    {% with messages = get_flashed_messages() %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
-            {% for message in messages %}
-            <div class="alert alert-info" role="alert">
+            {% for category, message in messages %}
+            <div class="{{ category }}" role="alert">
               {{ message }}
             </div>
             {% endfor %}

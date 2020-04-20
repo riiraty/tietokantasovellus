@@ -40,7 +40,7 @@ def threads_create():
   db.session().add(posted)
   db.session().commit()
   
-  flash("New post succesfully saved!")
+  flash("Your new post was saved", "alert alert-info")
   return redirect(url_for("posts_index"))
 
 # yksittäisen langan näkymä
@@ -65,8 +65,8 @@ def threads_delete(thread_id):
     Thread.delete_thread_posts(thread_id)
     db.session.commit()
 
-    flash("Your post and all the comments were deleted")
+    flash("Your post and all the comments were deleted", "alert alert-info")
     return redirect(url_for("posts_index"))
   else:
-    flash("You are not authorized")
+    flash("You are not authorized", "alert alert-danger")
     return redirect(url_for("posts_index"))

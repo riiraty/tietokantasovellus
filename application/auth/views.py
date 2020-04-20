@@ -17,28 +17,29 @@ def auth_login():
     
   if not form.validate():
     return render_template("auth/loginform.html",
-      form = LoginForm(),
-      error = 'There must be a typo, please try again'
+      form = form
     )
 
+  # jos käyttäjänimi ja salasana ei vastaa
   user = User.query.filter_by(username=form.username.data,
     password=form.password.data).first()
   if not user:
     return render_template("auth/loginform.html",
       form = form,
-      error = "Invalid username or password"
+      error = "Username and password do not match."
     )
 
   print("User '" + user.username + "' identified")
   login_user(user)
+  flash("Succesfully logged in!", "alert alert-success")
   return redirect(url_for("posts_index"))
 
 # uloskirjautuminen
 @app.route("/auth/logout/")
 def auth_logout():
   logout_user()
-  flash("Succesfully logged out!")
-  return redirect(url_for("index"))
+  flash("Succesfully logged out!", "alert alert-success")
+  return redirect(url_for("posts_index"))
 
 # uusi käyttäjä
 @app.route("/auth/signup/", methods = ["GET", "POST"])
@@ -68,10 +69,10 @@ def auth_signup():
 
     # uusi käyttäjä tallennettiin tietokantaan ja kirjataan sisään
     login_user(newUser)
-    flash(f"Welcome to the Forum, {current_user.username}! You are ready to start posting.")
+    flash(f"Welcome to the Forum, {current_user.username}! You are ready to start posting.", "alert alert-info")
     return redirect(url_for("posts_index"))
   else:
-    flash("Wanted username already taken, choose another")
+    flash("Wanted username already taken, choose another", "alert alert-warning")
     return render_template("auth/signupform.html", form = form)
 
 
