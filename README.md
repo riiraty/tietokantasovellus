@@ -25,9 +25,13 @@ Sovellus käyttää Herokussa PostgreSQL-tietokantaa.
 #### Keskustelujen tarkastelu
 
 * Käyttäjä näkee [listauksessa](https://afternoon-oasis-48455.herokuapp.com/posts/) 25 tuoreinta kommenttiketjua 
-* Kysely on tällä hetkellä toteutettu ohjelmallisesti ja tarpeettoman monimutkaisesti, samat tiedot saa helpommin Thread-taulusta
 * Ketjun otsikko on linkki, josta voi avata ketjun näkyviin
 * Yksittäisen ketjun näkymässä listataan ketjun postaukset
+
+#### Käyttäjien tarkastelu
+
+* Yksittäisen käyttäjän sivulla voi tarkastella tuoreimpia kommentteja ja postaushistoriaa
+* Osa keskeneräistä hakutoimintoa
 
 #### Uuden kommenttiketjun luominen
 
@@ -46,6 +50,10 @@ Sovellus käyttää Herokussa PostgreSQL-tietokantaa.
 * Kommentin poisto varmistetaan käyttäjältä, varmistus poistaa vastaavan rivin tietokannasta
 * Ketjun aloittanut käyttäjä voi poistaa koko ketjun, ja kaikki siihen liittyvät kommentit
 * Ketjun poisto varmistetaan käyttäjältä
+
+#### Hakutoiminto
+
+* Navigointipalkkiin on lisätty hakukenttä, mutta toiminnallisuus on vielä kesken
 
 #### Muuta
 
