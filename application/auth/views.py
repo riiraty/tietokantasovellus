@@ -32,7 +32,11 @@ def auth_login():
   print("User '" + user.username + "' identified")
   login_user(user)
   flash("Succesfully logged in!", "alert alert-success")
-  return redirect(url_for("posts_index"))
+
+  # kirjautumiskehotteen jälkeinen ohjaus
+  next = request.args.get("next")
+  
+  return redirect(next or url_for("posts_index"))
 
 # uloskirjautuminen
 @app.route("/auth/logout/")
