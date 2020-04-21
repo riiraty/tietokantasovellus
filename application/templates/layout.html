@@ -23,6 +23,10 @@
               <a class="nav-link" href="{{ url_for('threads_form') }} "><i class="fas fa-plus-circle fa-lg"></i> New</a>
             </li>
         </ul>
+        <form class="form-inline mr-4" role="form" method="GET" action="/">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search by username" aria-label="Search">
+          <button class="btn btn-outline-light btn-sm my-2 my-sm-0" type="submit"><i class="fas fa-search fa-sm"></i> Search</button>
+        </form>
         <div class="form-inline mt-2 mt-md-0">
           {% if current_user.is_authenticated %}
           <span class="navbar-text mr-4">

@@ -1,48 +1,50 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <h3>{{ thread.title }}</h3>
-  <em>First post {{ thread.creation_time.strftime("%H:%M %d/%m/%y") }}</em>
+<h3>{{ thread.title }}</h3>
+<em>First post {{ thread.creation_time.strftime("%H:%M %d/%m/%y") }}</em>
+{% if user.id == thread.owner_id %}
+<a class="btn btn-danger btn-sm float-right" href="{{url_for('threads_delete', thread_id=thread.id)}}" role="button"
+onclick="return confirm('Are you sure? Your post and all the comments will be permanently deleted.')">
+<i class="fas fa-trash-alt"></i> delete the thread
+</a>
+{% endif %}
 
-  <table class="table table-striped">
+<div class="table-responsive">
+  <table class="table table-striped table-bordered mt-2">
     <tbody>
     {% for post in thread.posts %}
       <tr>
         <td>
-          <strong><i class="fas fa-user-circle"></i> {{ post.account.username }}</strong>
+          <strong><i class="fas fa-user-circle" style="color:#107484;"></i> {{ post.account.username }}</strong> </br>
+          <em style="color:#0a464f;font-size:12px;">{{ post.post_time.strftime("%H:%M (%d/%m/%y)")}}</em>
         </td>
-        <td>
-          {{ post.content }}
+        <td style="word-wrap: break-word; min-width: 160px;max-width: 520px;">
+          <p class="text-break">
+            {{ post.content }}
+          </p>
           {% if post.post_time != post.modification_time %}
           <em>(edited)</em>
           {% endif %}
         </td>
-        <td>
-          {{ post.post_time.strftime("%H:%M (%d/%m/%y)")}}
-        </td>
         {% if user.id == post.account_id %}
         <td>
-          <a class="btn btn-outline-secondary" href="{{url_for('edit_form', thread_id=post.thread.id, post_id=post.id)}}" role="button">edit</a>
-        </td>
-        <td>
-          <a class="btn btn-outline-danger" href="{{url_for('posts_delete', thread_id=post.thread.id, post_id=post.id)}}" role="button"
-            onclick="return confirm('Are you sure? Click `OK` to delete post permanently')"
-          >delete</a>
+          <div>
+            <a class="btn btn-outline-secondary btn-sm btn-block" href="{{url_for('edit_form', thread_id=post.thread.id, post_id=post.id)}}" role="button">edit</a>
+            <a class="btn btn-outline-danger btn-sm btn-block" href="{{url_for('posts_delete', thread_id=post.thread.id, post_id=post.id)}}" role="button"
+              onclick="return confirm('Are you sure? Click `OK` to delete post permanently')"
+            >delete</a>
+          </div>
         </td>
         {% else %}
-        <td></td>
         <td></td>
         {% endif %}
       </tr>
     {% endfor %}
     </tbody>
   </table>
+</div>
 
-  <a class="btn btn-info" href="{{ url_for('posts_form', thread_id=thread.id) }}" role="button"><i class="fas fa-plus"></i> add a comment</a>
-  {% if user.id == thread.owner_id %}
-    <a class="btn btn-danger" href="{{url_for('threads_delete', thread_id=thread.id)}}" role="button"
-      onclick="return confirm('Are you sure? Your post and all the comments will be permanently deleted.')">
-      delete the thread
-    </a>
-  {% endif %}
+<a class="btn btn-info btn-block" href="{{ url_for('posts_form', thread_id=thread.id) }}" role="button"><i class="fas fa-plus"></i> add a comment</a>
+
 {% endblock %}

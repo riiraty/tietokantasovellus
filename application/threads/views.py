@@ -18,8 +18,7 @@ def posts_index():
 
   return render_template("threads/list.html",
     threads = threads,
-    user = current_user,
-    now = db.func.current_timestamp()
+    user = current_user
   )
 
 # lomake uudelle langalle
