@@ -1,12 +1,26 @@
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 
+from sqlalchemy import desc, func
+
 from application import app, db
 from application.posts.models import Post
 from application.auth.models import User
 from application.threads.models import Thread
 
 from application.threads.forms import ThreadForm
+
+# listausnäkymä
+@app.route("/posts/", methods=["GET"])
+def posts_index():
+  # haetaan 25 viimeksi päivitettyä ketjua
+  threads = db.session.query(Thread.id, Thread.title, User.username, Thread.modification_time).join(User, User.id == Thread.owner_id).order_by(Thread.modification_time.desc()).limit(25).all()
+
+  return render_template("threads/list.html",
+    threads = threads,
+    user = current_user,
+    now = db.func.current_timestamp()
+  )
 
 # lomake uudelle langalle
 @app.route("/posts/threads/new/")

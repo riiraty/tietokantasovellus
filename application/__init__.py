@@ -1,6 +1,7 @@
 from flask import Flask
 app = Flask(__name__)
 
+# tietokanta
 from flask_sqlalchemy import SQLAlchemy
 
 import os
@@ -14,6 +15,7 @@ else:
 
 db = SQLAlchemy(app)
 
+# toiminnallisuuksia
 from application import views
 
 from application.posts import models
@@ -25,6 +27,7 @@ from application.threads import views
 from application.auth import models
 from application.auth import views
 
+# kirjautumistoiminnallisuus
 from application.auth.models import User
 from os import urandom
 app.config["SECRET_KEY"] = urandom(32)
@@ -32,11 +35,10 @@ app.config["SECRET_KEY"] = urandom(32)
 from flask_login import LoginManager
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_message_category = "alert alert-warning"
-
 
 login_manager.login_view = "auth_login"
 login_manager.login_message = "Please login to use this feature."
+login_manager.login_message_category = "alert alert-warning"
 
 @login_manager.user_loader
 def load_user(user_id):

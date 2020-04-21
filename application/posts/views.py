@@ -9,18 +9,6 @@ from application.auth.models import User
 from application.threads.models import Thread
 from application.posts.forms import PostForm
 
-# listausnäkymä
-@app.route("/posts/", methods=["GET"])
-def posts_index():
-  # haetaan ketjujen tuoreimmat postaukset (25) ja listataan
-  sub = db.session.query(func.max(Post.id)).group_by(Post.thread_id).subquery()
-  posts = db.session.query(Post).filter(Post.id.in_(sub)).order_by(Post.post_time.desc()).limit(25).all()
-  
-  return render_template("posts/list.html",
-    posts = posts,
-    user = current_user
-  )
-
 # lomake uudelle kommentille
 @app.route("/posts/<thread_id>/new/")
 @login_required
