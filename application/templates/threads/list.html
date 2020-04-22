@@ -21,10 +21,12 @@
           </a>
         </td>
         <td style="word-wrap: break-word; max-width: 130px;">
-          <stron>
-            <i class="fas fa-user-circle" style="color:#107484;"></i>
-             {{ thread.username }}
-          </strong>
+          <a href="{{url_for('get_user', username=thread.username)}}" style="color:#107484;">
+            <stron>
+              <i class="fas fa-user-circle"></i>
+               {{ thread.username }}
+            </strong>
+          </a>
         </td>
         <td>
           <em style="color:#0a464f;font-size:12px;">

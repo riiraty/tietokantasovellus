@@ -1,0 +1,104 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+{% if (not users and not posts and not threads) %}
+<div class="card">
+  <div class="card-body">
+    There where no matches.
+  </div>
+</div>
+{% else %}
+<h2>Search results for <em style="color:#107484;">{{ wanted }}</em></h2>
+{% endif %}
+
+{% if users %}
+<div>
+  <h4>Users</h4>
+  {% for user in users %}
+  <div class="card mb-2">
+    <div class="card-body">
+      <h5 class="card-title" style="color:#107484;">
+        <i class="fas fa-user-circle fa-3x mr-2"></i>
+         {{ user.username }}
+      </h5>
+      {% if user.date_created %}
+      <p class="card-text"style="color:#0a464f;">
+        On the Forum since {{ user.date_created.strftime("%d/%m/%y") }} 
+        <a href="{{url_for('get_user', username=user.username)}}" class="btn btn-info btn-sm ml-2" data-toggle="tooltip" data-placement="right" title="view user page">more</a>
+      </p>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+</br>
+
+{% if posts %}
+<div>
+  <h4>Comments</h4>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered mt-2 mb-4">
+      <thead>
+        <tr>
+          <th scope="col">content</th>
+          <th scope="col">post time</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for post in posts %}
+      <tr>
+        <td style="word-wrap: break-word; max-width: 350px;">
+          <a href="{{url_for('posts_thread', thread_id=post.thread.id)}}" class="text-info">
+            {{ post.content }}
+          </a>
+        </td>
+        <td>
+          <em style="color:#0a464f;font-size:12px;">
+            <i class="far fa-clock" style="color:#107484;"></i>
+             {{ post.post_time.strftime("%H:%M (%d/%m/%y)")}}
+          </em>
+        </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endif %}
+
+{% if threads %}
+<div>
+  <h4>Post threads</h4>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered mt-2">
+      <thead>
+        <tr>
+          <th scope="col">title</th>
+          <th scope="col">post time</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for thread in threads %}
+      <tr>
+        <td style="word-wrap: break-word; max-width: 350px;">
+          <a href="{{url_for('posts_thread', thread_id=thread.id)}}" class="text-info">
+            {{ thread.title }}
+          </a>
+        </td>
+        <td>
+          <em style="color:#0a464f;font-size:12px;">
+            <i class="far fa-clock" style="color:#107484;"></i>
+            {{ thread.creation_time.strftime("%H:%M (%d/%m/%y)") }}
+          </em>
+        </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
