@@ -15,11 +15,11 @@ onclick="return confirm('Are you sure? Your post and all the comments will be pe
     <tbody>
     {% for post in thread.posts %}
       <tr>
-        <td>
+        <td style="word-wrap: break-word; max-width: 120px;">
           <strong><i class="fas fa-user-circle" style="color:#107484;"></i> {{ post.account.username }}</strong> </br>
           <em style="color:#0a464f;font-size:12px;">{{ post.post_time.strftime("%H:%M (%d/%m/%y)")}}</em>
         </td>
-        <td style="word-wrap: break-word; min-width: 160px;max-width: 520px;">
+        <td style="word-wrap: break-word; min-width: 160px;max-width: 480px;">
           <p class="text-break">
             {{ post.content }}
           </p>
