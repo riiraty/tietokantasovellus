@@ -6,7 +6,7 @@ Harjoitustyö on yksinkertainen keskustelufoorumi.
 Tarkempi kuvaus tietokantakaavioineen löytyy [täältä](https://github.com/riiraty/tietokantasovellus/blob/master/documentation/documentation.md).
 
 ### Sovellus Herokussa
-Sovellus löytyy osoitteesta [https://afternoon-oasis-48455.herokuapp.com/posts/](https://afternoon-oasis-48455.herokuapp.com/posts/)
+Sovellus löytyy osoitteesta [https://afternoon-oasis-48455.herokuapp.com](https://afternoon-oasis-48455.herokuapp.com)
 
 Sovellus käyttää Herokussa PostgreSQL-tietokantaa.
 
@@ -27,7 +27,8 @@ Sovellus käyttää Herokussa PostgreSQL-tietokantaa.
 * Käyttäjä näkee [listauksessa](https://afternoon-oasis-48455.herokuapp.com/posts/) 25 tuoreinta kommenttiketjua 
 * Ketjun otsikko on linkki, josta voi avata ketjun näkyviin
 * Ketjun aloittajan käyttäjänimi on linkki käyttäjäsivulle
-* Yksittäisen ketjun näkymässä listataan ketjun postaukset
+* Yksittäisen ketjun näkymässä listataan ketjun kommentit
+* Ketjunäkymän sivutus näyttää kerrallaan kuusi kommenttia, painikkeista voi navigoida sivujen välillä
 
 #### Käyttäjien tarkastelu
 
@@ -41,6 +42,7 @@ Sovellus käyttää Herokussa PostgreSQL-tietokantaa.
 #### Vanhan ketjun kommentoiminen
 
 * Kirjautunut käyttäjä voi lisätä ketjuun kommentin täyttämällä lomakkeen
+* Lomakkeen saa näkyviin tuoreimman kommenttisivun alalaidasta
 * Ketjuun päivittyy muokkausajankohdaksi uusimman postauksen luomisajankohta
 
 #### Omien sisältöjen hallinnointi
