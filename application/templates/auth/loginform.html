@@ -5,12 +5,12 @@
 
 <form method="POST">
   <div>
-    <em>{{ error }}</em>
+    <em style="color:red;">{{ error }}</em>
   </div>
   <div class="form-group">
     <div>
       {% for error in form.username.errors %}
-      <em>{{ error }}</em> </br>
+      <em style="color:red;">{{ error }}</em> </br>
       {% endfor %}
     </div>
     <div>
@@ -20,7 +20,7 @@
   <div class="form-group">
     <div>
       {% for error in form.password.errors %}
-      <em>{{ error }}</em> </br>
+      <em style="color:red;">{{ error }}</em> </br>
       {% endfor %}
     </div>
     <div>

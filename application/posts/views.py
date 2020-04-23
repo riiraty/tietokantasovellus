@@ -92,7 +92,7 @@ def posts_edit(thread_id, post_id):
 @app.route("/posts/<thread_id>/delete/<post_id>", methods=["GET", "POST"])
 @login_required
 def posts_delete(thread_id, post_id):
-  post = Post.query.get(post_id)
+  post = Post.query.get_or_404(post_id)
 
   if post.account_id == current_user.id:
     db.session.delete(post)

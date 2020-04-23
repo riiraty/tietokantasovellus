@@ -4,10 +4,13 @@
 <h3>With an account, you can participate in Forum discussions. Sign up by filling the form.</h3>
 
 <form method="POST" action="{{ url_for('auth_signup') }}">
+  <div>
+    <em style="color:red;">{{ error }}</em>
+  </div>
   <div class="form-group">
     <div>
       {% for error in form.username.errors %}
-      <em>{{ error }}</em> </br>
+      <em style="color:red;">{{ error }}</em> </br>
       {% endfor %}
     </div>
     <div>
@@ -17,7 +20,7 @@
   <div class="form-group">
     <div>
       {% for error in form.password.errors %}
-      <em>{{ error }}</em> </br>
+      <em style="color:red;">{{ error }}</em> </br>
       {% endfor %}
     </div>
     <div>
@@ -27,7 +30,7 @@
   <div class="form-group">
     <div>
       {% for error in form.confirm.errors %}
-      <em>{{ error }}</em> </br>
+      <em style="color:red;">{{ error }}</em> </br>
       {% endfor %}
     </div>
     <div>

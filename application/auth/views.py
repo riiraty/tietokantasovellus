@@ -76,7 +76,9 @@ def auth_signup():
     flash(f"Welcome to the Forum, {current_user.username}! You are ready to start posting.", "alert alert-info")
     return redirect(url_for("posts_index"))
   else:
-    flash("Wanted username already taken, choose another", "alert alert-warning")
-    return render_template("auth/signupform.html", form = form)
+    return render_template("auth/signupform.html",
+      form = form,
+      error = "Wanted username already taken, choose another."
+    )
 
 
