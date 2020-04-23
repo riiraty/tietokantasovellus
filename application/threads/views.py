@@ -60,9 +60,13 @@ def threads_create():
 @app.route("/posts/threads/<thread_id>", methods=["GET"])
 def posts_thread(thread_id):
   thread = Thread.query.get_or_404(thread_id)
+  page = request.args.get("page", default=1, type=int)
+  per_page = 6
+  posts = Post.query.filter_by(thread_id=thread_id).order_by(Post.post_time).paginate(page,per_page,error_out=False)
 
   return render_template("threads/thread.html",
     thread = thread,
+    posts = posts,
     user = current_user
   )
 

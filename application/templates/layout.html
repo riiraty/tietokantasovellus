@@ -29,9 +29,11 @@
         </form>
         <div class="form-inline mt-2 mt-md-0">
           {% if current_user.is_authenticated %}
-          <span class="navbar-text mr-4">
-            <i class="fas fa-user"></i><em> {{current_user.username}}</em>
-          </span>
+          <a href="{{url_for('get_user', username=current_user.username)}}" style="color:#107484;">
+            <span class="navbar-text mr-4">
+              <i class="fas fa-user"></i><em> {{current_user.username}}</em>
+            </span>
+          </a>
           <a href="{{ url_for('auth_logout') }}" class="text-light"><i class="fas fa-sign-out-alt"></i> Logout</a>
           {% else %}
           <a href="{{ url_for('auth_login') }}" class="text-light"><i class="fas fa-sign-in-alt"></i> Login</a>
