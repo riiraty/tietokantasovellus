@@ -55,14 +55,21 @@ onclick="return confirm('Are you sure? Your post and all the comments will be pe
 {% endif %}
 
 <nav aria-label="Page navigation">
-  <ul class="pagination justify-content-end" >
+  <ul class="pagination justify-content-end">
     {% if posts.has_prev %}
+    <li class="page-item">
+      <a class="page-link" style="color:#107484;" href="{{ url_for('posts_thread', thread_id=thread.id, page=1) }}" aria-label="First">
+      1
+      </a>
+    </li>
+    {% if posts.prev_num !=1 %}
     <li class="page-item">
       <a class="page-link" style="color:#107484;" href="{{ url_for('posts_thread', thread_id=thread.id, page=posts.prev_num) }}" aria-label="Previous">
         <span aria-hidden="true">&laquo; {{ posts.prev_num }}</span>
         <span class="sr-only">Previous</span>
       </a>
     </li>
+    {% endif %}
     {% endif %}
     {% if posts.pages != 1 %}
     <li class="page-item active"><a class="page-link" href="{{ url_for('posts_thread', thread_id=thread.id, page=posts.page) }}">{{ posts.page }}</a></li>
@@ -72,6 +79,11 @@ onclick="return confirm('Are you sure? Your post and all the comments will be pe
       <a class="page-link" style="color:#107484;" href="{{ url_for('posts_thread', thread_id=thread.id, page=posts.next_num) }}" aria-label="Next">
         <span aria-hidden="true">{{ posts.next_num }} &raquo;</span>
         <span class="sr-only">Next</span>
+      </a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" style="color:#107484;" href="{{ url_for('posts_thread', thread_id=thread.id, page=posts.pages) }}" aria-label="Last">
+        most recent
       </a>
     </li>
     {% endif %}
