@@ -1,12 +1,13 @@
 # Keskustelufoorumi
-Harjoitustyönä  toteutetaan yksinkertainen keskustelufoorumi, jossa käyttäjät voivat lukea keskusteluketjuja ja osallistua kommentoimalla. Ketjujen lukeminen ei vaadi kirjautumista, mutta uuden ketjun aloitus tai kommentin jättäminen vaativat. Kirjatuneet käyttäjät voivat myös muokata tai poistaa omia kirjoituksiaan. 
+Toteutettu harjoitustyö on yksinkertainen keskustelufoorumi nimeltä Forum, jossa rekisteröityneet käyttäjät voivat luoda keskusteluja ja osallistua kommentoimalla. Kirjatuneena käyttäjät voivat myös muokata tai poistaa itse tuottamaansa sisältöä. Ilman käyttäjätiliä on mahdollista seurata keskusteluja osallistumatta, tarkastella käyttäjiä ja hakea sisältöä hakutoiminnon avulla. 
 
 ## Dokumentaatio
 
-[Käyttötapaukset](https://github.com/riiraty/tietokantasovellus/blob/master/documentation/kayttotapaukset.md)
+[Käyttötapaukset ja SQL-kyselyt](https://github.com/riiraty/tietokantasovellus/blob/master/documentation/kayttotapaukset.md)
 
 [Asennus- ja käyttöohje](https://github.com/riiraty/tietokantasovellus/blob/master/documentation/asennus-_ja_kayttoohje.md)
 
+[Rajoitteet ja puutteet](https://github.com/riiraty/tietokantasovellus/blob/master/documentation/rajoitteet_ja_puutteet.md)
 
 ### Tietokannan rakenne
 
