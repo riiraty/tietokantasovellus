@@ -2,6 +2,7 @@
 
 {% block body %}
 <h3>{{ thread.title }}</h3>
+<p style="color:#107484;">{{ commentCount }} comments</p>
 {% if user.id == thread.owner_id %}
 <a class="btn btn-danger btn-sm float-right" href="{{url_for('threads_delete', thread_id=thread.id)}}" role="button"
 onclick="return confirm('Are you sure? Your post and all the comments will be permanently deleted.')">
