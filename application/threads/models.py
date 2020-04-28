@@ -1,5 +1,5 @@
 from application import db
-from sqlalchemy.sql import text
+from sqlalchemy.sql import text, func
 
 class Thread(db.Model):
   id = db.Column(db.Integer, primary_key=True)
@@ -14,9 +14,3 @@ class Thread(db.Model):
 
   def __init__(self, title):
     self.title = title
-
-  # metodi postauksien poistamiseksi, kun lanka poistetaan
-  @staticmethod
-  def delete_thread_posts(thread_id):
-    stmt = text("DELETE FROM Post WHERE thread_id = :thread_id;").params(thread_id=thread_id)
-    res = db.engine.execute(stmt)

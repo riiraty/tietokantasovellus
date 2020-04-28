@@ -61,15 +61,18 @@ def auth_signup():
     )
 
   wantedUsername = form.username.data
-
   existingUser = User.query.filter_by(username=wantedUsername).first()
 
   # jos käyttäjänimi ei ole jo käytössä
   if not existingUser:
-    newUser = User(form.username.data, form.password.data)
+    try:
+      newUser = User(form.username.data, form.password.data)
 
-    db.session().add(newUser)
-    db.session.commit()
+      db.session().add(newUser)
+      db.session.commit()
+    except:
+      flash("Error while creating account, please try again", "alert alert-danger")
+      return redirect(url_for("auth_signup"))
 
     # uusi käyttäjä tallennettiin tietokantaan ja kirjataan sisään
     login_user(newUser)

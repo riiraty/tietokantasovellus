@@ -36,16 +36,20 @@ def posts_create(thread_id):
       title = thread.title
     )
 
-  thread.modification_time = db.func.current_timestamp()
+  try:
+    thread.modification_time = db.func.current_timestamp()
 
-  posted = Post(form.content.data)
-  posted.account_id = current_user.id
-  posted.thread_id = thread_id
+    posted = Post(form.content.data)
+    posted.account_id = current_user.id
+    posted.thread_id = thread_id
 
-  db.session().add(posted)
-  db.session().commit()
-  
-  flash("Your comment was posted", "alert alert-info")
+    db.session().add(posted)
+    db.session().commit()
+    flash("Your comment was posted", "alert alert-info")
+  except:
+    db.session.rollback()
+    flash("Error occurred, comment was not posted", "alert alert-danger")
+
   return redirect(url_for("posts_thread", thread_id=thread_id))
 
 # vanhan (oman) postauksen muokkauslomake
@@ -77,12 +81,17 @@ def posts_edit(thread_id, post_id):
         form = form, post = post
       )
 
-    newContent = form.content.data
-    post.content = newContent
+    try:
+      newContent = form.content.data
+      post.content = newContent
 
-    db.session().commit()
+      db.session().commit()
 
-    flash("Your post was edited", "alert alert-info")
+      flash("Your post was edited", "alert alert-info")
+    except:
+      db.session.rollback()
+      flash("Error occurred, changes were not saved", "alert alert-danger")
+
   else:
     flash("You are not authorized", "alert alert-danger")
     
@@ -95,9 +104,13 @@ def posts_delete(thread_id, post_id):
   post = Post.query.get_or_404(post_id)
 
   if post.account_id == current_user.id:
-    db.session.delete(post)
-    db.session.commit()
-    flash("Your post was deleted", "alert alert-info")
+    try:
+      db.session.delete(post)
+      db.session.commit()
+      flash("Your post was deleted", "alert alert-info")
+    except:
+      db.session.rollback()
+      flash("Error occurred, post was not deleted", "alert alert-danger")
   else:
     flash("You are not authorized", "alert alert-danger")
 
