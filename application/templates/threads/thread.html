@@ -33,13 +33,15 @@ onclick="return confirm('Are you sure? Your post and all the comments will be pe
           <em>(edited)</em>
           {% endif %}
         </td>
+        <!-- Controllers for current users content -->
         {% if user.id == post.account_id %}
         <td>
           <div>
             <a class="btn btn-outline-secondary btn-sm btn-block" href="{{url_for('edit_form', thread_id=post.thread.id, post_id=post.id)}}" role="button">edit</a>
             <a class="btn btn-outline-danger btn-sm btn-block" href="{{url_for('posts_delete', thread_id=post.thread.id, post_id=post.id)}}" role="button"
-              onclick="return confirm('Are you sure? Click `OK` to delete post permanently')"
-            >delete</a>
+              onclick="return confirm('Are you sure? Click `OK` to delete post permanently')">
+              delete
+            </a>
           </div>
         </td>
         {% else %}
@@ -51,10 +53,8 @@ onclick="return confirm('Are you sure? Your post and all the comments will be pe
   </table>
 </div>
 
-{% if posts.page == posts.pages %}
 <a class="btn btn-info btn-block mb-2" href="{{ url_for('posts_form', thread_id=thread.id) }}" role="button"><i class="fas fa-plus"></i> add a comment</a>
-{% endif %}
-
+<!-- Pagination controller -->
 <nav aria-label="Page navigation">
   <ul class="pagination justify-content-end">
     {% if posts.has_prev %}
@@ -82,11 +82,13 @@ onclick="return confirm('Are you sure? Your post and all the comments will be pe
         <span class="sr-only">Next</span>
       </a>
     </li>
+    {% if posts.next_num != posts.pages %}
     <li class="page-item">
       <a class="page-link" style="color:#107484;" href="{{ url_for('posts_thread', thread_id=thread.id, page=posts.pages) }}" aria-label="Last">
         most recent
       </a>
     </li>
+    {% endif %}
     {% endif %}
   </ul>
 </nav>

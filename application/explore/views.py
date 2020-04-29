@@ -19,11 +19,11 @@ def get_user(username):
 
     # kaikki käyttäjän aloittamat langat sivutettuna
     page = request.args.get("page", default=1, type=int)
-    per_page = 5
+    per_page = 2
 
     threads = Thread.query.filter_by(owner_id=user.id).order_by(Thread.creation_time.desc()).paginate(page,per_page,error_out=False)
 
-    return render_template("users/user.html",
+    return render_template("explore/user.html",
       user = user,
       thread_posts = thread_posts,
       threads = threads,
@@ -32,3 +32,19 @@ def get_user(username):
   else:
     flash(f"There is no {username} on the Forum. If you entered the URL manually please check your spelling and try the search tool. ", "alert alert-warning")
     return redirect(url_for("posts_index"))
+
+@app.route("/search/", methods=["POST"])
+def search():
+  wanted = request.form.get("seek")
+  formatted_wanted = "%" + wanted + "%"
+
+  users = User.query.filter(User.username.like(formatted_wanted)).all()
+  posts = Post.query.filter(Post.content.like(formatted_wanted)).all()
+  threads = Thread.query.filter(Thread.title.like(formatted_wanted)).all()
+
+  return render_template("explore/search_results.html",
+    users = users,
+    posts = posts,
+    threads = threads,
+    wanted = wanted
+  )

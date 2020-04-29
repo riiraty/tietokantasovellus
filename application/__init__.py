@@ -27,7 +27,7 @@ from application.threads import views
 from application.auth import models
 from application.auth import views
 
-from application.users import views
+from application.explore import views
 
 # kirjautumistoiminnallisuus
 from application.auth.models import User
