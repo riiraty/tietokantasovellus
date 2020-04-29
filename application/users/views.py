@@ -13,12 +13,15 @@ def get_user(username):
   user = User.query.filter_by(username=username).first()
 
   if user:
-    # 8 viimeisintä lankaa
+    # 5 viimeisintä lankaa
     sub = db.session.query(func.max(Post.id)).filter_by(account_id=user.id).group_by(Post.thread_id).subquery()
-    thread_posts = db.session.query(Post).filter(Post.id.in_(sub)).order_by(Post.post_time.desc()).limit(8).all()
+    thread_posts = db.session.query(Post).filter(Post.id.in_(sub)).order_by(Post.post_time.desc()).limit(5).all()
 
-    # kaikki käyttäjän aloittamat langat
-    threads = Thread.query.filter_by(owner_id=user.id).order_by(Thread.creation_time.desc()).all()
+    # kaikki käyttäjän aloittamat langat sivutettuna
+    page = request.args.get("page", default=1, type=int)
+    per_page = 5
+
+    threads = Thread.query.filter_by(owner_id=user.id).order_by(Thread.creation_time.desc()).paginate(page,per_page,error_out=False)
 
     return render_template("users/user.html",
       user = user,
