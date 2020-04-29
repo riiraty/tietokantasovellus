@@ -7,6 +7,7 @@ from application import app, db
 from application.posts.models import Post
 from application.auth.models import User
 from application.threads.models import Thread
+from application.explore.models import Archive
 
 from application.threads.forms import ThreadForm
 
@@ -89,6 +90,7 @@ def threads_delete(thread_id):
   # kirjautuneen oltava langan omistaja
   if thread.owner_id == current_user.id:
     try:
+      Archive.query.filter_by(thread_id=thread.id).delete()
       Post.query.filter_by(thread_id=thread.id).delete()
       db.session.delete(thread)
       db.session.commit()
@@ -98,6 +100,7 @@ def threads_delete(thread_id):
     except:
       db.session.rollback()
       flash("Error occurred, could not delete thread", "alert alert-danger")
+      return redirect(url_for("posts_index"))
 
   else:
     flash("You are not authorized", "alert alert-danger")

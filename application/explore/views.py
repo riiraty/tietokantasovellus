@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for, flash
-from flask_login import current_user
+from flask_login import current_user, login_required
 
 from sqlalchemy import desc, func
 
@@ -7,6 +7,7 @@ from application import app, db
 from application.auth.models import User
 from application.posts.models import Post
 from application.threads.models import Thread
+from application.explore.models import Archive
 
 @app.route("/users/<username>", methods=["GET"])
 def get_user(username):
@@ -48,3 +49,48 @@ def search():
     threads = threads,
     wanted = wanted
   )
+
+@app.route("/user/archive/<thread_id>", methods=["GET","POST"])
+@login_required
+def archive(thread_id):
+  thread = Thread.query.get_or_404(thread_id)
+  try:
+    existing = Archive.query.filter_by(account_id=current_user.id, thread_id=thread.id).first()
+
+    if not existing:
+      record = Archive(current_user.id, thread.id)
+      db.session().add(record)
+      db.session().commit()
+      flash("Discussion thread archived", "alert alert-info")
+    else:
+      flash("Already in archive", "alert alert-warning")
+  except:
+    db.session.rollback()
+    flash("Error occurred", "alert alert-danger")
+
+  return redirect(url_for("posts_thread", thread_id=thread_id))
+
+@app.route("/user/<username>/archive/", methods=["GET"])
+@login_required
+def get_archive(username):
+  if current_user.username == username:
+    try:
+      sub = db.session.query(Archive.thread_id).filter_by(account_id=current_user.id).subquery()
+      threads = db.session.query(Thread.id, Thread.title, User.username, Thread.modification_time).join(User, User.id==Thread.owner_id).filter(Thread.id.in_(sub)).all()
+      return render_template("explore/archive.html",
+        user = current_user,
+        threads = threads
+      )
+    except:
+      flash("Error occurred", "alert alert-danger")
+  else:
+    flash("You are not authorized", "alert alert-danger")
+  return redirect(url_for("posts_index"))
+
+@app.route("/user/<username>/archive/delete/<thread_id>", methods=["GET","POST"])
+@login_required
+def remove_archived_thread(username, thread_id):
+  # remove from db:
+  # write code here
+
+  return redirect(url_for("posts_index"))

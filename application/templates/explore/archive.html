@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <h2>Your archive</h2>
+  <p class="text-muted">Users own the threads they have started. If they choose to delete content, it will also disappear from your archive.</p>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Topic</th>
+          <th scope="col">Posted by</th>
+          <th scope="col">Latest update</th>
+          <th scope="col">Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for thread in threads %}
+      <tr>
+        <td style="word-wrap: break-word; min-width: 250px;">
+          <a href="{{url_for('posts_thread', thread_id=thread.id)}}" class="text-info">
+            {{ thread.title }}
+          </a>
+        </td>
+        <td style="word-wrap: break-word; max-width: 130px;">
+          <a href="{{url_for('get_user', username=thread.username)}}" style="color:#107484;">
+            <stron>
+              <i class="fas fa-user-circle"></i>
+               {{ thread.username }}
+            </strong>
+          </a>
+        </td>
+        <td>
+          <em style="color:#0a464f;font-size:12px;">
+            <i class="far fa-clock" style="color:#107484;"></i>
+             {{ thread.modification_time.strftime("%H:%M (%d/%m/%y)")}}
+          </em>
+        </td>
+        <td>
+          <a class="btn btn-danger btn-sm" href="{{url_for('remove_archived_thread', username=user.username, thread_id=thread.id)}}" role="button">
+            <i class="fas fa-eraser"></i> remove
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

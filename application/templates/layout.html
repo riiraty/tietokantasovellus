@@ -18,12 +18,21 @@
       <!-- Navigation links -->
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
+            <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Latest content from users.">
               <a class="nav-link" href="{{ url_for('posts_index') }} "><i class="fas fa-comments fa-lg"></i> Posts</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Start a new discussion.">
               <a class="nav-link" href="{{ url_for('threads_form') }} "><i class="fas fa-plus-circle fa-lg"></i> New</a>
             </li>
+            {% if current_user.is_authenticated %}
+            <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Your archived posts.">
+              <a class="nav-link" href="{{ url_for('get_archive', username=current_user.username) }} "><i class="fas fa-archive fa-lg"></i> Archive</a>
+            </li>
+            {% else %}
+            <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Log in to use this feature.">
+              <a class="nav-link disabled"><i class="fas fa-archive fa-lg"></i> Archive</a>
+            </li>
+            {% endif %}
         </ul>
         <!-- Search form -->
         <form class="form-inline mr-4" role="form" method="POST" action="{{ url_for('search') }}">
