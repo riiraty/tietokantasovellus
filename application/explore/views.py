@@ -32,7 +32,7 @@ def get_user(username):
 
     # kaikki käyttäjän aloittamat langat sivutettuna
     page = request.args.get("page", default=1, type=int)
-    per_page = 2
+    per_page = 5
 
     threads = (
       Thread.query
