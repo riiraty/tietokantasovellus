@@ -58,6 +58,11 @@ Sovellus käyttää Herokussa PostgreSQL-tietokantaa.
 * Navigointipalkkin hakukentän syötteen perusteella etsitään käyttäjänimen, kommentin sisällän ja ketjun otsikon osalta tietokannasta osuvat rivit
 * Hakutulokset esitetään kootusti omalla sivullaan
 
+#### Arkistointitoiminto
+
+* Kirjautunut käyttäjä voi tallentaa keskusteluketjuja
+* Omaa arkistoa voi tarkastella ja siitä voi poistaa keskusteluketjuja
+
 #### Muuta
 
 * Sivun ylälaitaan on toteutettu navigointia varten valikko
