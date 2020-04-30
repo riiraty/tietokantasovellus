@@ -1,5 +1,12 @@
 # Keskustelufoorumi
-Toteutettu harjoitustyö on yksinkertainen keskustelufoorumi nimeltä Forum, jossa rekisteröityneet käyttäjät voivat luoda keskusteluja ja osallistua kommentoimalla. Kirjatuneena käyttäjät voivat myös muokata tai poistaa itse tuottamaansa sisältöä. Ilman käyttäjätiliä on mahdollista seurata keskusteluja osallistumatta, tarkastella käyttäjiä ja hakea sisältöä hakutoiminnon avulla. 
+
+Toteutettu harjoitustyö on yksinkertainen keskustelufoorumi nimeltä Forum, jossa rekisteröityneet käyttäjät voivat tuottaa sisältöä ja tallentaa keskusteluja. Itse tuotettua sisältöä on mahdollista muokata ja poistaa.
+
+Ilman käyttäjätiliä on mahdollista seurata keskusteluja osallistumatta, tarkastella käyttäjiä ja hakea sisältöä hakutoiminnon avulla.
+
+Sovelluksessa ei ole varsinaisa käyttäjärooleja. Käyttäjänimi _MODERATOR_ pystyy poistamaan muiden käyttäjien sisältöä.
+
+Jatkokehitystä varten jäi vielä paljon ideoita.
 
 ## Dokumentaatio
 
@@ -11,4 +18,4 @@ Toteutettu harjoitustyö on yksinkertainen keskustelufoorumi nimeltä Forum, jos
 
 ### Tietokannan rakenne
 
-![alt text](https://github.com/riiraty/tietokantasovellus/blob/master/documentation/pics/forum_database_schema2.png "Database tables")
+![alt text](https://github.com/riiraty/tietokantasovellus/blob/master/documentation/pics/forum_database_schema3.png "Database tables")

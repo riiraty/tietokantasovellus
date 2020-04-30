@@ -54,14 +54,13 @@ Luo tietokanta Herokuun komennolla:
 
 ## Käyttöohje
 
-Forum on yksinkertainen keskustelufoorumi, missä rekisteröityneet käyttäjät voivat aloittaa uusia keskuteluja tai osallistua vanhoihin keskusteluketjuihin. Ilman käyttäjätiliä on mahdollista seurata keskusteluja osallistumatta. 
-
+Forum on yksinkertainen keskustelufoorumi, missä rekisteröityneet käyttäjät voivat aloittaa uusia keskuteluja sekä kommentoida ja tallentaa vanhoja ketjuja. Ilman käyttäjätiliä on mahdollista tarkastella sisältöä osallistumatta. 
 
 ### Keskusteluketjujen ja käyttäjien tarkastelu
 
 Voit tarkastella tuoreimpia keskusteluketjuja yläpalkin linkistä _Posts_. Ketjun otsikkoa klikkaamalla voit avata näkyviin keskustelun. Pitkät keskusteluketjut näytetään usealla sivulla, ketjun oikeasta alakulmasta voit navigoida sivujen välillä. Käyttäjänimen klikkaaminen avaa kyseisen käyttäjän oman sivun.
 
-Käyttäjäsivulla näet ajankohdan, jolloin kyseinen käyttäjä liittyi Forumille. _Recent activity_ näyttää kahdeksan viimeisintä keskustelua, joihin käyttäjä on osallistunut. _Post History_ listaa kaikki käyttäjän aloittamat keskustelut uusimmasta vanhimpaan.
+Käyttäjäsivulla näet ajankohdan, jolloin kyseinen käyttäjä liittyi Forumille. _Recent activity_ näyttää viisi viimeisintä keskustelua, joihin käyttäjä on osallistunut. _Post History_ listaa kaikki käyttäjän aloittamat keskustelut uusimmasta vanhimpaan, kerrallaan näytetään viisi keskustelua.
 
 
 ### Käyttäjätilin luominen ja kirjautuminen
@@ -72,10 +71,10 @@ Jos olet jo luonut käyttäjätunnuksen, voit valita yläpalkista linkin _Log in
 
 
 ### Keskusteluketjujen toiminnallisuudet
-Kirjautuneena käyttäjänä voit pelkän keskustelujen tarkastelun sijaan tuottaa itse sisältöä. Jos et ole kirjautunut, ja yrität käyttää kirjautumista vaativaa toimintoa, sinua pyydetään kirjautumaan sisään.
+Kirjautuneena käyttäjänä voit pelkän keskustelujen tarkastelun sijaan tuottaa itse sisältöä ja tallentaa keskusteluja. Jos et ole kirjautunut, ja yrität käyttää kirjautumista vaativaa toimintoa, sinua pyydetään kirjautumaan sisään.
 
 ##### Uusi keskusteluketju
-Voit aloittaa uuden keskustelun yläpalkin linkistä _New_. Otsikon pituuden on oltava 3-60 merkkiä, se ei voi koostua pelkistä välilyönneistä. Aloituksen sisällön on oltava 3-280 merkkiä, se ei voi koostua pelkistä välilyönneistä. Painamalla nappia _add a nex post_, lomakkeelle syöttämäsi sisältö tallennetaan. Voit nyt nähdä uuden keskustelusi Most recent listauksessa. 
+Voit aloittaa uuden keskustelun yläpalkin linkistä _New_. Otsikon pituuden on oltava 3-60 merkkiä, se ei voi koostua pelkistä välilyönneistä. Aloituksen sisällön on oltava 3-280 merkkiä, se ei voi koostua pelkistä välilyönneistä. Painamalla nappia _add a new post_, lomakkeelle syöttämäsi sisältö tallennetaan. Voit nyt nähdä uuden keskustelusi Most recent listauksessa. 
 
 ##### Ketjun kommentoiminen
 Voit osallistua keskusteluun kommentoimalla. Painamalla keskusteluketjun otsikkoa saat näkyviin kommentit. Pitkät keskusteluketjut näytetään usealla sivulla, ketjun oikeasta alakulmasta voit navigoida sivujen välillä. Tuoreimman kommentin sisältävältä sivulta löydät alalaidasta napin _+ add a comment_, josta voit lisätä ketjun jatkoksi oman kommenttisi. Kommentin sisällön on oltava 3-280 merkkiä, se ei voi koostua pelkistä välilyönneistä.
@@ -88,6 +87,8 @@ Muokkauslomakkeella on vanha kommenttisi, voit muokata tai lisätä tekstiä. Vo
 ##### Kokonaisen keskusteluketjun poistaminen
 Itse aloittamaasi keskusteluketjua tarkastellessa näet oikeassa yläkulmassa napin _delete the thread_. Tästä painamalla voit kerralla poistaa ketjun ja kaikki sen kommentit. Huomioi, että myös muiden käyttäjien tuottama sisältö poistuu lopullisesti. Jos poistat vain oman aloituksen ja kommentit, muut käyttäjät voivat jatkaa keskustelua. Ketju löytyy tällöin edelleen oman sivusi historiasta.
 
+##### Keskustelun arkistoiminen
+Voit tallentaa keskusteluketjun avaamalla sen ja painamalla nappia _archive_. Aiemmin tallentamasi keskustelut löytyvät yläpalkin linkistä _Archive_. Huomioithan, että jos keskustelun aloittanut käyttäjä poistaa ketjun, se poistuu myös arkistostasi. Voit itse poistaa ketjuja arkistosta painamalla nappia _remove_.
 
 ### Hakutoiminnallisuus
 Yläpalkista löytyy hakukenttä, jonka avulla voit etsiä Forumilta käyttäjiä, kommentteja ja keskusteluketjuja.
@@ -97,4 +98,4 @@ Yläpalkista löytyy hakukenttä, jonka avulla voit etsiä Forumilta käyttäji�
 * Kommentit, joiden sisällöstä löytyy hakusana
 * Kommenttiketjut, joiden otsikosta löytyy hakusana
 
-Hakusana voi koostua useasta sanasta. Tuloksissa näkyvät kaikki kohteet, joiden osana hakusana on, esim. hakusana _kahvi_ voi antaa tuloksia joissa on sanoja _kahvittelu_, _päiväkahvit_, _kahvipapu_...
+Hakusana voi koostua useasta sanasta. Tuloksissa näkyvät kaikki kohteet, joiden osana hakusana on, esim. hakusana _kahvi_ voi antaa tuloksia joissa on sanoja _kahvittelu_, _päiväkahvi_, _suklaakahvijäätelö_...
