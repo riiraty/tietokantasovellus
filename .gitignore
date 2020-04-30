@@ -144,4 +144,4 @@ static
 
 #stuff
 .vscode/
-posts.db
+app.db
