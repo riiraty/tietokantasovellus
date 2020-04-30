@@ -1,24 +1,32 @@
 {% extends "layout.html" %}
   
 {% block body %}
-<h3>{{ post.thread.title}}</h3>
-<h3>{{ title }}</h3>
-<form method="POST" action="{{ url_for('posts_edit', thread_id=post.thread_id, post_id=post.id) }}">
-  <div class="form-group">
-    <div>
-      {% for error in form.content.errors %}
-      <em>{{ error }}</em> </br>
-      {% endfor %}
+  <h3>{{ post.thread.title}}</h3>
+  <h3>{{ title }}</h3>
+  <form method="POST" 
+  action="{{ url_for('posts_edit', thread_id=post.thread_id, post_id=post.id) }}">
+    <div class="form-group">
+      <div>
+        {% for error in form.content.errors %}
+        <em>{{ error }}</em> </br>
+        {% endfor %}
+      </div>
+      <div>
+        {% set f = form.content.process_data(post.content) %}
+        {{ form.content(class="form-control", rows='5')}}
+      </div>
     </div>
-    <div>
-      {% set f = form.content.process_data(post.content) %}
-      {{ form.content(class="form-control", rows='5')}}
-    </div>
-  </div>
-  <button type="submit" class="btn btn-primary">save changes</button>
-  <a class="btn btn-warning" href="{{url_for('posts_thread', thread_id=post.thread_id)}}" role="button">cancel</a>
-  <a class="btn btn-danger" href="{{url_for('posts_delete', thread_id=post.thread_id, post_id=post.id)}}" role="button"
-    onclick="return confirm('Are you sure? The post will be deleted permanently.')">delete
-  </a>
-</form>
+    <button type="submit" class="btn btn-primary">save changes</button>
+    <a class="btn btn-warning" 
+    href="{{url_for('posts_thread', thread_id=post.thread_id)}}" 
+    role="button">
+      cancel
+    </a>
+    <a class="btn btn-danger" 
+    href="{{url_for('posts_delete', thread_id=post.thread_id, post_id=post.id)}}" 
+    role="button"
+    onclick="return confirm('Are you sure? The post will be deleted permanently.')">
+      delete
+    </a>
+  </form>
 {% endblock %}

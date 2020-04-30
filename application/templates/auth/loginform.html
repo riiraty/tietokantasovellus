@@ -1,33 +1,33 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h3>Log in to your account</h3>
+  <h3>Log in to your account</h3>
 
-<form method="POST">
-  <div>
-    <em style="color:red;">{{ error }}</em>
-  </div>
-  <div class="form-group">
+  <form method="POST">
     <div>
-      {% for error in form.username.errors %}
-      <em style="color:red;">{{ error }}</em> </br>
-      {% endfor %}
+      <em style="color:red;">{{ error }}</em>
     </div>
-    <div>
-      {{ form.username(class="form-control", placeholder="Username")}}
+    <div class="form-group">
+      <div>
+        {% for error in form.username.errors %}
+        <em style="color:red;">{{ error }}</em> </br>
+        {% endfor %}
+      </div>
+      <div>
+        {{ form.username(class="form-control", placeholder="Username")}}
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <div>
-      {% for error in form.password.errors %}
-      <em style="color:red;">{{ error }}</em> </br>
-      {% endfor %}
+    <div class="form-group">
+      <div>
+        {% for error in form.password.errors %}
+        <em style="color:red;">{{ error }}</em> </br>
+        {% endfor %}
+      </div>
+      <div>
+        {{ form.password(class="form-control", placeholder="Password")}}
+      </div>
     </div>
-    <div>
-      {{ form.password(class="form-control", placeholder="Password")}}
-    </div>
-  </div>
-  <button type="submit" class="btn btn-primary">login</button>
-  <a class="btn btn-warning" href="{{url_for('posts_index')}}" role="button">cancel</a>
-</form>
+    <button type="submit" class="btn btn-primary">login</button>
+    <a class="btn btn-warning" href="{{url_for('posts_index')}}" role="button">cancel</a>
+  </form>
 {% endblock %}

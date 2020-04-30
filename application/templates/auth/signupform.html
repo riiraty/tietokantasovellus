@@ -1,43 +1,45 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h3>With an account, you can participate in Forum discussions. Sign up by filling the form.</h3>
+  <h3>With an account, you can participate in Forum discussions 
+  and save content to your archive. Sign up by filling the form.
+  </h3>
 
-<form method="POST" action="{{ url_for('auth_signup') }}">
-  <div>
-    <em style="color:red;">{{ error }}</em>
-  </div>
-  <div class="form-group">
+  <form method="POST" action="{{ url_for('auth_signup') }}">
     <div>
-      {% for error in form.username.errors %}
-      <em style="color:red;">{{ error }}</em> </br>
-      {% endfor %}
+      <em style="color:red;">{{ error }}</em>
     </div>
-    <div>
-      {{ form.username(class="form-control", placeholder="Username")}}
+    <div class="form-group">
+      <div>
+        {% for error in form.username.errors %}
+        <em style="color:red;">{{ error }}</em> </br>
+        {% endfor %}
+      </div>
+      <div>
+        {{ form.username(class="form-control", placeholder="Username")}}
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <div>
-      {% for error in form.password.errors %}
-      <em style="color:red;">{{ error }}</em> </br>
-      {% endfor %}
+    <div class="form-group">
+      <div>
+        {% for error in form.password.errors %}
+        <em style="color:red;">{{ error }}</em> </br>
+        {% endfor %}
+      </div>
+      <div>
+        {{ form.password(class="form-control", placeholder="Password")}}
+      </div>
     </div>
-    <div>
-      {{ form.password(class="form-control", placeholder="Password")}}
+    <div class="form-group">
+      <div>
+        {% for error in form.confirm.errors %}
+        <em style="color:red;">{{ error }}</em> </br>
+        {% endfor %}
+      </div>
+      <div>
+        {{ form.confirm(class="form-control", placeholder="Repeat password")}}
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <div>
-      {% for error in form.confirm.errors %}
-      <em style="color:red;">{{ error }}</em> </br>
-      {% endfor %}
-    </div>
-    <div>
-      {{ form.confirm(class="form-control", placeholder="Repeat password")}}
-    </div>
-  </div>
-  <button type="submit" class="btn btn-primary">sign up</button>
-  <a class="btn btn-warning" href="{{url_for('posts_index')}}" role="button">cancel</a>
-</form>
+    <button type="submit" class="btn btn-primary">sign up</button>
+    <a class="btn btn-warning" href="{{url_for('posts_index')}}" role="button">cancel</a>
+  </form>
 {% endblock %}
