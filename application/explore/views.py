@@ -16,8 +16,19 @@ def get_user(username):
 
   if user:
     # 5 viimeisintä lankaa
-    sub = db.session.query(func.max(Post.id)).filter_by(account_id=user.id).group_by(Post.thread_id).subquery()
-    thread_posts = db.session.query(Post).filter(Post.id.in_(sub)).order_by(Post.post_time.desc()).limit(5).all()
+    sub = (
+      db.session.query(func.max(Post.id))
+      .filter_by(account_id=user.id)
+      .group_by(Post.thread_id)
+      .subquery()
+    )
+    thread_posts = (
+      db.session.query(Post)
+      .filter(Post.id.in_(sub))
+      .order_by(Post.post_time.desc())
+      .limit(5)
+      .all()
+    )
 
     # kaikki käyttäjän aloittamat langat sivutettuna
     page = request.args.get("page", default=1, type=int)

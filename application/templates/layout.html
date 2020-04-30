@@ -83,6 +83,10 @@
       </div>
     </nav>
 
+    {% if current_user.username == 'MODERATOR' %}
+    <div class="alert alert-danger">YOU ARE LOGGED IN AS MODERATOR</div>
+    {% endif %}
+
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
             {% for category, message in messages %}

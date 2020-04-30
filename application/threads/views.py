@@ -88,8 +88,7 @@ def posts_thread(thread_id):
   return render_template("threads/thread.html",
     thread = thread,
     commentCount = posts.total - 1,
-    posts = posts,
-    user = current_user
+    posts = posts
   )
 
 # langan poistaminen
@@ -99,14 +98,14 @@ def threads_delete(thread_id):
   thread = Thread.query.get_or_404(thread_id)
 
   # kirjautuneen oltava langan omistaja
-  if thread.owner_id == current_user.id:
+  if thread.owner_id == current_user.id or current_user.username == 'MODERATOR':
     try:
       Archive.query.filter_by(thread_id=thread.id).delete()
       Post.query.filter_by(thread_id=thread.id).delete()
       db.session.delete(thread)
       db.session.commit()
 
-      flash("Your post and all the comments were deleted", "alert alert-info")
+      flash("Post and all the comments were deleted", "alert alert-info")
       return redirect(url_for("posts_index"))
     except:
       db.session.rollback()

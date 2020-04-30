@@ -3,24 +3,31 @@
 {% block body %}
   <h3>{{ thread.title }}</h3>
   <div class="container d-flex justify-content-between">
-  <p style="color:#107484;">{{ commentCount }} comments</p>
-  <div class="button-group" role="group">
-    {% if user.is_authenticated %}
-      <a class="btn btn-info btn-sm" 
-      href="{{url_for('archive', thread_id=thread.id)}}" 
-      role="button">
-        <i class="fas fa-archive"></i> archive
-      </a>
-    {% endif %}
-    {% if user.id == thread.owner_id %}
-      <a class="btn btn-danger btn-sm float-right" 
-      href="{{url_for('threads_delete', thread_id=thread.id)}}" 
-      role="button"
-      onclick="return confirm('Are you sure? Your post and all the comments will be permanently deleted.')">
-      <i class="fas fa-trash-alt"></i> delete the thread
-      </a>
-    {% endif %}
-  </div>
+    <p style="color:#107484;">{{ commentCount }} comments</p>
+    <div class="button-group" role="group">
+      {% if current_user.is_authenticated %}
+        <a class="btn btn-info btn-sm" 
+        href="{{url_for('archive', thread_id=thread.id)}}" 
+        role="button">
+          <i class="fas fa-archive"></i> archive
+        </a>
+      {% endif %}
+      {% if current_user.id == thread.owner_id %}
+        <a class="btn btn-danger btn-sm float-right" 
+        href="{{url_for('threads_delete', thread_id=thread.id)}}" 
+        role="button"
+        onclick="return confirm('Are you sure? Your post and all the comments will be permanently deleted.')">
+        <i class="fas fa-trash-alt"></i> delete the thread
+        </a>
+      {% elif current_user.username == 'MODERATOR' %}
+        <a class="btn btn-danger btn-sm float-right" 
+        href="{{url_for('threads_delete', thread_id=thread.id)}}" 
+        role="button"
+        onclick="return confirm('USE THE POWER!?')">
+        <i class="fas fa-trash-alt"></i> delete the thread
+        </a>
+      {% endif %}
+    </div>
   </div>
 
   <div class="table-responsive">
@@ -49,8 +56,8 @@
               <em class="text-muted">(edited)</em>
             {% endif %}
           </td>
-          <!-- Controllers for current users content -->
-          {% if user.id == post.account_id %}
+          <!-- Content controllers -->
+          {% if current_user.id == post.account_id %}
             <td>
               <div>
                 <a class="btn btn-outline-secondary btn-sm btn-block" 
@@ -65,6 +72,14 @@
                   delete
                 </a>
               </div>
+            </td>
+          {% elif current_user.username == 'MODERATOR' %}
+            <td>
+              <a class="btn btn-outline-danger btn-sm btn-block" 
+              href="{{url_for('posts_delete', thread_id=post.thread.id, post_id=post.id)}}" 
+              role="button">
+                delete
+              </a>
             </td>
           {% else %}
             <td></td>

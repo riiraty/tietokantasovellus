@@ -87,7 +87,7 @@ def posts_edit(thread_id, post_id):
 
       db.session().commit()
 
-      flash("Your post was edited", "alert alert-info")
+      flash("Post was edited", "alert alert-info")
     except:
       db.session.rollback()
       flash("Error occurred, changes were not saved", "alert alert-danger")
@@ -103,11 +103,11 @@ def posts_edit(thread_id, post_id):
 def posts_delete(thread_id, post_id):
   post = Post.query.get_or_404(post_id)
 
-  if post.account_id == current_user.id:
+  if post.account_id == current_user.id or current_user.username == 'MODERATOR':
     try:
       db.session.delete(post)
       db.session.commit()
-      flash("Your post was deleted", "alert alert-info")
+      flash("Post was deleted", "alert alert-info")
     except:
       db.session.rollback()
       flash("Error occurred, post was not deleted", "alert alert-danger")
