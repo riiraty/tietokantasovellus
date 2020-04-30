@@ -36,7 +36,7 @@
           </em>
         </td>
         <td>
-          <a class="btn btn-danger btn-sm" href="{{url_for('remove_archived_thread', username=user.username, thread_id=thread.id)}}" role="button">
+          <a class="btn btn-danger btn-sm" href="{{url_for('remove_archived_thread', user_id=current_user.id, thread_id=thread.id)}}" role="button">
             <i class="fas fa-eraser"></i> remove
           </a>
         </td>

@@ -15,7 +15,13 @@ from application.threads.forms import ThreadForm
 @app.route("/posts/", methods=["GET"])
 def posts_index():
   # haetaan 25 viimeksi päivitettyä ketjua
-  threads = db.session.query(Thread.id, Thread.title, User.username, Thread.modification_time).join(User, User.id == Thread.owner_id).order_by(Thread.modification_time.desc()).limit(25).all()
+  threads = (
+    db.session.query(Thread.id, Thread.title, User.username, Thread.modification_time)
+    .join(User, User.id == Thread.owner_id)
+    .order_by(Thread.modification_time.desc())
+    .limit(25)
+    .all()
+  )
 
   return render_template("threads/list.html",
     threads = threads,
@@ -72,7 +78,12 @@ def posts_thread(thread_id):
 
   page = request.args.get("page", default=1, type=int)
   per_page = 7
-  posts = Post.query.filter_by(thread_id=thread_id).order_by(Post.post_time).paginate(page,per_page,error_out=False)
+  posts = (
+    Post.query
+    .filter_by(thread_id=thread_id)
+    .order_by(Post.post_time)
+    .paginate(page,per_page,error_out=False)
+  )
 
   return render_template("threads/thread.html",
     thread = thread,

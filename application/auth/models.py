@@ -12,7 +12,9 @@ class User(db.Model):
     username = db.Column(db.String(144), nullable=False)
     password = db.Column(db.String(144), nullable=False)
 
+    threads = db.relationship("Thread", backref='account', lazy=True)
     posts = db.relationship("Post", backref='account', lazy=True)
+    archives = db.relationship("Archive", backref='account', lazy=True)
 
     def __init__(self, username, password):
         self.username = username

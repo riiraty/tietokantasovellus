@@ -9,7 +9,8 @@ from application.posts.models import Post
 from application.threads.models import Thread
 from application.explore.models import Archive
 
-@app.route("/users/<username>", methods=["GET"])
+# yksittäinen käyttäjäsivu
+@app.route("/users/<username>/", methods=["GET"])
 def get_user(username):
   user = User.query.filter_by(username=username).first()
 
@@ -22,7 +23,12 @@ def get_user(username):
     page = request.args.get("page", default=1, type=int)
     per_page = 2
 
-    threads = Thread.query.filter_by(owner_id=user.id).order_by(Thread.creation_time.desc()).paginate(page,per_page,error_out=False)
+    threads = (
+      Thread.query
+      .filter_by(owner_id=user.id)
+      .order_by(Thread.creation_time.desc())
+      .paginate(page,per_page,error_out=False)
+    )
 
     return render_template("explore/user.html",
       user = user,
@@ -34,6 +40,7 @@ def get_user(username):
     flash(f"There is no {username} on the Forum. If you entered the URL manually please check your spelling and try the search tool. ", "alert alert-warning")
     return redirect(url_for("posts_index"))
 
+# hakutoiminto
 @app.route("/search/", methods=["POST"])
 def search():
   wanted = request.form.get("seek")
@@ -50,7 +57,8 @@ def search():
     wanted = wanted
   )
 
-@app.route("/user/archive/<thread_id>", methods=["GET","POST"])
+# arkistoon tallentaminen
+@app.route("/user/archive/<thread_id>/", methods=["GET","POST"])
 @login_required
 def archive(thread_id):
   thread = Thread.query.get_or_404(thread_id)
@@ -70,27 +78,43 @@ def archive(thread_id):
 
   return redirect(url_for("posts_thread", thread_id=thread_id))
 
+# käyttäjäkohtaisen arkiston hakeminen
 @app.route("/user/<username>/archive/", methods=["GET"])
 @login_required
 def get_archive(username):
   if current_user.username == username:
-    try:
+    # try:
       sub = db.session.query(Archive.thread_id).filter_by(account_id=current_user.id).subquery()
-      threads = db.session.query(Thread.id, Thread.title, User.username, Thread.modification_time).join(User, User.id==Thread.owner_id).filter(Thread.id.in_(sub)).all()
+      threads = (
+        db.session.query(Thread.id, Thread.title, User.username, Thread.modification_time)
+        .join(User, User.id==Thread.owner_id)
+        .filter(Thread.id.in_(sub))
+        .order_by(Thread.modification_time.desc())
+        .all()
+      )
       return render_template("explore/archive.html",
-        user = current_user,
         threads = threads
       )
-    except:
-      flash("Error occurred", "alert alert-danger")
+    # except:
+    #   flash("Error occurred", "alert alert-danger")
   else:
     flash("You are not authorized", "alert alert-danger")
   return redirect(url_for("posts_index"))
 
-@app.route("/user/<username>/archive/delete/<thread_id>", methods=["GET","POST"])
+# langan poistaminen arkistosta
+@app.route("/user/<int:user_id>/archive/delete/<thread_id>/", methods=["GET","POST"])
 @login_required
-def remove_archived_thread(username, thread_id):
-  # remove from db:
-  # write code here
+def remove_archived_thread(user_id, thread_id):
+  if current_user.id == user_id:
+    try:
+      record = Archive.query.filter_by(account_id=user_id, thread_id=thread_id).first()
+      db.session.delete(record)
+      db.session.commit()
 
+      flash("Removed from archive", "alert alert-info")
+    except:
+      db.session.rollback()
+      flash("Error occurred", "alert alert-danger")
+    return redirect(url_for("get_archive", username=current_user.username))
+  flash("You are not authorized", "alert alert-danger")
   return redirect(url_for("posts_index"))

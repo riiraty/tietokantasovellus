@@ -1,5 +1,4 @@
 from application import db
-from sqlalchemy.sql import text
 
 class Post(db.Model):
   id = db.Column(db.Integer, primary_key=True)
